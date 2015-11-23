@@ -1,73 +1,98 @@
 @extends('layouts.master')
 
+@section('head')
+
+    <link rel="stylesheet" type="text/css" href="/css/upload/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/css/upload/demo.css" />
+    <link rel="stylesheet" type="text/css" href="/css/upload/component.css" />
+@stop
+
 @section('content')
 
-<form method="POST" action="/items/add" accept-charset="UTF-8" class="form-inline" role="form">
-    <input type='hidden' value='{{ csrf_token() }}' name='_token'>
+<!-- resources/views/auth/add.blade.php -->
 
-    <div class="form-group">
 
-        <label for="color">Color</label>
-        <input class="form-control"
-            name="color"
-            type="text"
-            value="{{ old('color') }}">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 
-        <label for="name">Item Name</label>
-        <input
-            class="form-control"
-            name="name"
-            type="text"
-            required="required"
-            value="{{ old('name', 'White Oxford Button Down')}}">
+<!-- remove this if you use Modernizr -->
+<script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+</head>
+
+<!-- Reference for file upload tool: http://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/ -->
+
+<div class="container">
+    <div class="content">
+        <form method="POST" action="/items/add" role="form" accept-charset="UTF-8" enctype="multipart/form-data">
+            {!! csrf_field() !!}
+        <div class="box">
+            <input type="file" name="image" id="file-5" class="inputfile inputfile-4" data-multiple-caption="{count} files selected" multiple />
+            <label for="file-5"><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/>
+            </svg></figure> <span>Choose a file&hellip;</span></label>
+        </div>
+        <input type="submit" name="submit" value="Upload">
+    </form>
     </div>
+</div><!-- /container -->
 
-    <div class="form-group">
-        <fieldset>
-            <label for="itemType">Item Type</label>
-            <select id = "itemType" class="form-control">
-                <option value = "shirt"> Shirt </option>
-                <option value = "pants"> Pants </option>
-                <option value = "shoes"> Shoes </option>
-                <option value = "sweater"> Sweater </option>
-                <option value = "tie"> Tie </option>
-                <option value = "shorts"> Shorts </option>
-                <option value = "gloves"> Gloves </option>
-            </select>
-        </fieldset>
-    </div>
+<center>
+@if(count($errors) > 0)
+    <ul class='errors'>
+        @foreach ($errors->all() as $error)
+            <li><span class='fa fa-exclamation-circle'></span> {{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+</center>
 
-    <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <input
-            class="form-control"
-            name="quantity"
-            type="number"
-            value="{{ old('quantity', '1')}}">
-    </div>
+<script type="text/javascript">
 
-    <fieldset class="form-group">
-      <label for="exampleInputFile">Item Image</label>
-      <input
-      type="file"
-      class="form-control-file"
-      value={{ old('itemFile') }}>
-    </fieldset>
+<!-- This changes the label to the name of the file to be uploaded -->
+var inputs = document.querySelectorAll( '.inputfile' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+	var label	 = input.nextElementSibling,
+		labelVal = label.innerHTML;
 
-    <fieldset class="form-group">
-      <label for="purchaseDate">Purchase Date</label>
-      <input
-      type="date"
-      class="form-control"
-      name="purchaseDate"
-      value="{{ old('purchaseDate')}}">
-      <small class="text-muted">Not required -- will default to current date.</small>
-    </fieldset>
+	input.addEventListener( 'change', function( e )
+	{
+		var fileName = '';
+		if( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
 
+		if( fileName )
+			label.querySelector( 'span' ).innerHTML = fileName;
+		else
+			label.innerHTML = labelVal;
+	});
+});
+</script>
 
-    <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="Add Item" size="10">
-    </div>
-</form>
+<script src="/js/custom-file-input.js"></script>
+
+<!--
+<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<center>
+<div class="wrapper">
+    <h1>Upload</h1>
+    <p class="heading">Upload an image of an article of clothing. Items look best against a background with contrast.</p>
+
+    <form method="POST" action="/items/add" role="form" accept-charset="UTF-8" enctype="multipart/form-data" class="dropzoneFileUpload">
+        {!! csrf_field() !!}
+            <div><input type="file" name="image"></div>
+
+            <div>
+                <input type="submit" class="submit" value="Upload">
+            </div>
+        </form>
+    <br>
+</div>
+-->
+
 
 @stop

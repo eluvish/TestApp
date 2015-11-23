@@ -11,7 +11,9 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-            $data = ['shirt','blue','top','boots','brown','fall','winter','white','gloves','leather','hands'];
+            $data = ['shirt','blue','top','boots','brown','fall','winter','white','gloves','leather','hands','dark blue','button down','oxford','shoes','khakis','pants','work','casual',
+        'red','shorts','summer', 'pink','summer','polo'
+    ];
 
             foreach($data as $tagName) {
                 $tag = new \Testbed\Tag();
