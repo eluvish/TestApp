@@ -9,7 +9,7 @@
     <title>
         @yield('title','Dev myCloser')
     </title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="/css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="/css/custom.min.css">
-    <link rel="stylesheet" href="/css/testbed.css">
+    <link rel="stylesheet" href="/css/myCloset.css">
 
     {{-- Yield any page specific CSS files or anything else you might want in the <head> --}}
     @yield('head')
@@ -42,7 +42,7 @@
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <a href="http://testbed.loc" class="navbar-brand">myCloset</a>
+      <a href="/" class="navbar-brand">myCloset</a>
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -53,13 +53,13 @@
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/items/add">Add Item</a>
+                        <a href="/upload">Add Item</a>
                     </li>
                     <li>
                         <a href="/items">List View</a>
                     </li>
                     <li>
-                        <a href="/items/list">Tags</a>
+                        <a href="/tags">Tags</a>
                     </li>
                     <li>
                         <a href="/random">Random</a>

@@ -1,12 +1,12 @@
 <?php
 
-namespace Testbed;
+namespace myCloset;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
     public function items() {
-        return $this->belongsToMany('\Testbed\Item')->withTimestamps();
+        return $this->belongsToMany('\myCloset\Item')->withTimestamps();
     }
 }

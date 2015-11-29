@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Console;
+namespace myCloset\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Testbed\Console\Commands\Inspire::class,
+        \myCloset\Console\Commands\Inspire::class,
     ];
 
     /**

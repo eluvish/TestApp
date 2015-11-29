@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Console\Commands;
+namespace myCloset\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

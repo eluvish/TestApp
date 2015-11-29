@@ -143,10 +143,10 @@ return [
         /*
          * Application Service Providers...
          */
-        Testbed\Providers\AppServiceProvider::class,
-        Testbed\Providers\AuthServiceProvider::class,
-        Testbed\Providers\EventServiceProvider::class,
-        Testbed\Providers\RouteServiceProvider::class,
+        myCloset\Providers\AppServiceProvider::class,
+        myCloset\Providers\AuthServiceProvider::class,
+        myCloset\Providers\EventServiceProvider::class,
+        myCloset\Providers\RouteServiceProvider::class,
 
     ],
 

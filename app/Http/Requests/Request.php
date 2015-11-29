@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Http\Requests;
+namespace myCloset\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

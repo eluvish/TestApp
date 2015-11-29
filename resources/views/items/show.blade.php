@@ -30,6 +30,13 @@
             @foreach($item->tags as $tag)
                 <td>{{$tag->name}}</td>
             @endforeach
+            <td>
+                <form action="/items/{{$item->id}}" method="post">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button>Delete Task</button>
+                </form>
+            </td>
             </tr>
         @endforeach
 

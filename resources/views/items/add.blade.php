@@ -24,7 +24,7 @@
 
 <div class="container">
     <div class="content">
-        <form method="POST" action="/items/add" role="form" accept-charset="UTF-8" enctype="multipart/form-data">
+        <form method="POST" action="/upload" role="form" accept-charset="UTF-8" enctype="multipart/form-data">
             {!! csrf_field() !!}
         <div class="box">
             <input type="file" name="image" id="file-5" class="inputfile inputfile-4" data-multiple-caption="{count} files selected" multiple />

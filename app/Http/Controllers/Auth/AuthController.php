@@ -1,10 +1,10 @@
 <?php
 
-namespace Testbed\Http\Controllers\Auth;
+namespace myCloset\Http\Controllers\Auth;
 
-use Testbed\User;
+use myCloset\User;
 use Validator;
-use Testbed\Http\Controllers\Controller;
+use myCloset\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

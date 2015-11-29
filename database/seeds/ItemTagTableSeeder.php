@@ -15,11 +15,11 @@ class ItemTagTableSeeder extends Seeder
 
 
 
-        $tags = \Testbed\Tag::all();
-        // $numUsers = \Testbed\Item::count();
+        $tags = \myCloset\Tag::all();
+        // $numUsers = \myCloset\Item::count();
         // echo "Number of items: " . $numUsers;
         // echo "Number of tags: ". $tags->count();
-        $items = \Testbed\Item::all();
+        $items = \myCloset\Item::all();
 
 
         // foreach ($tags as $tag) {
@@ -45,7 +45,7 @@ class ItemTagTableSeeder extends Seeder
 
 
             // foreach($tags as $tagName) {
-            //         $tag = \Testbed\Tag::where('name','LIKE',$tagName)->first();
+            //         $tag = \myCloset\Tag::where('name','LIKE',$tagName)->first();
             //         $book->tags()->save($tag);
             //     }
 

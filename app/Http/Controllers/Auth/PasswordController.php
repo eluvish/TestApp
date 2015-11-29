@@ -1,8 +1,8 @@
 <?php
 
-namespace Testbed\Http\Controllers\Auth;
+namespace myCloset\Http\Controllers\Auth;
 
-use Testbed\Http\Controllers\Controller;
+use myCloset\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

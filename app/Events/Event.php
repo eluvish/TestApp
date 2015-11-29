@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Events;
+namespace myCloset\Events;
 
 abstract class Event
 {

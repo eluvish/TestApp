@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(Testbed\User::class, function (Faker\Generator $faker) {
+$factory->define(myCloset\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
@@ -20,7 +20,7 @@ $factory->define(Testbed\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Testbed\Item::class, function (Faker\Generator $faker) {
+$factory->define(myCloset\Item::class, function (Faker\Generator $faker) {
     return [
         // 'name' => $faker->image($dir = 'images', $width = 300, $height = 250),
         'name' => $faker->imageUrl($width = 300, $height = 250),
@@ -28,7 +28,7 @@ $factory->define(Testbed\Item::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Testbed\Tag::class, function (Faker\Generator $faker) {
+$factory->define(myCloset\Tag::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->ColorName,
     ];

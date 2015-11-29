@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Jobs;
+namespace myCloset\Jobs;
 
 use Illuminate\Bus\Queueable;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Http\Middleware;
+namespace myCloset\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 

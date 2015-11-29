@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Providers;
+namespace myCloset\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

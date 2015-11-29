@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Exceptions;
+namespace myCloset\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

@@ -29,7 +29,7 @@ class TagsTableSeeder extends Seeder
     ];
 
             foreach($data as $tagName) {
-                $tag = new \Testbed\Tag();
+                $tag = new \myCloset\Tag();
                 $tag->name = $tagName;
                 $tag->save();
             }

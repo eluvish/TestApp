@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => Testbed\User::class,
+    'model' => myCloset\User::class,
 
     /*
     |--------------------------------------------------------------------------

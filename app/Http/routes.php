@@ -15,13 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/items/add','ItemsController@index');
-    Route::post('/items/add', 'ItemsController@create');
-    Route::get('/items', 'ItemsController@showall');
-    Route::get('/items/{id}', 'ItemsController@edit');
+//Route::group(['middleware' => 'auth'], function () {
+    Route::get('/items','ItemsController@index');
+    Route::get('/upload', 'ItemsController@create');
+    Route::post('/upload', 'ItemsController@store');
+    Route::get('/items/{id}', 'ItemsController@show');
     Route::post('/items/{id}', 'ItemsController@edit');
-});
+    Route::delete('/items/{id}', 'ItemsController@destroy');
+//});
 
 # Show login form (dont need?, make it redirect?)
 Route::get('/login', 'Auth\AuthController@getLogin');

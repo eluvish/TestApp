@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Http;
+namespace myCloset\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -13,11 +13,11 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
-        \Testbed\Http\Middleware\EncryptCookies::class,
+        \myCloset\Http\Middleware\EncryptCookies::class,
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \Testbed\Http\Middleware\VerifyCsrfToken::class,
+        \myCloset\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -26,8 +26,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Testbed\Http\Middleware\Authenticate::class,
+        'auth' => \myCloset\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \Testbed\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \myCloset\Http\Middleware\RedirectIfAuthenticated::class,
     ];
 }

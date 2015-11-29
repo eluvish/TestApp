@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Http\Middleware;
+namespace myCloset\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

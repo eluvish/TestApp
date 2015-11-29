@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed;
+namespace myCloset;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function items() {
         # With timetsamps() will ensure the pivot table has its created_at/updated_at fields automatically maintained
-        return $this->belongsToMany('\Testbed\Item')->withTimestamps();
+        return $this->belongsToMany('\myCloset\Item')->withTimestamps();
     }
     /**
      * The database table used by the model.

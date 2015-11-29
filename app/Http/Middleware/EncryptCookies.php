@@ -1,6 +1,6 @@
 <?php
 
-namespace Testbed\Http\Middleware;
+namespace myCloset\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 
