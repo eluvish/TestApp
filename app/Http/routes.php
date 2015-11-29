@@ -24,6 +24,9 @@ Route::get('/', function () {
     Route::delete('/items/{id}', 'ItemsController@destroy');
 //});
 
+// Tags
+    Route::post('/tags/unlink', 'TagsController@unlink');
+
 # Show login form (dont need?, make it redirect?)
 Route::get('/login', 'Auth\AuthController@getLogin');
 
