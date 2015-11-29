@@ -20,7 +20,7 @@ Route::get('/', function () {
     Route::get('/upload', 'ItemsController@create');
     Route::post('/upload', 'ItemsController@store');
     Route::get('/items/{id}', 'ItemsController@show');
-    Route::post('/items/{id}', 'ItemsController@edit');
+    Route::patch('/items/{id}', 'ItemsController@update');
     Route::delete('/items/{id}', 'ItemsController@destroy');
 //});
 

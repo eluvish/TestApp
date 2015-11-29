@@ -18,6 +18,7 @@ class ItemsController extends Controller
     public function index()
     {
         $user = \Auth::user();
+        //dd($user);
         $items = \myCloset\Item::where('user_id','=',$user->id)->with('tags')->get();
         return view('items.show')->with('items', $items);
 
@@ -79,7 +80,7 @@ class ItemsController extends Controller
 
         // save to database
         $item = new \myCloset\Item();
-        $item->name = $imgLoc;
+        $item->src = $imgLoc;
         $item->user_id = $user->id;
         $item->save();
 
@@ -97,8 +98,9 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
-        $item = \myCloset\Item::find($id);
+        // get item instance from database with associated tags
+        $item = \myCloset\Item::where('id',$id)->with('tags')->first();
+
         return view('items.edit')->with(['item' => $item]);
     }
 
@@ -110,7 +112,7 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+        // This is supposed to be a GET request.
         return "in edit";
     }
 
@@ -123,7 +125,20 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // start with validation
+        $this->validate($request,['tag' => 'required']);
+
+        // get the item out of the database
+        $item = \myCloset\Item::find($id);
+
+        // create new tag Model
+        $tag = new \myCloset\Tag();
+        $tag->name = $request->tag;
+        //add Tag
+        $item->tags()->save($tag);
+
+        //dd($item);
+        return redirect::to('/items/'.$id);
     }
 
     /**

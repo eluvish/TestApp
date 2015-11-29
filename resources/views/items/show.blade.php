@@ -24,8 +24,8 @@
         @foreach($items as $item)
         <tr>
             <td> {{ $item->user_id }} </td>
-            <td> <a href="/items/{{$item->id}}"><img src="{{$item->name}}" width="150" height="100" class="img-thumbnail"></a>
-            <td> {{ $item->name }} </td>
+            <td> <a href="/items/{{$item->id}}"><img src="{{$item->src}}" width="150" height="100" class="img-thumbnail"></a>
+            <td> {{ $item->src }} </td>
 
             @foreach($item->tags as $tag)
                 <td>{{$tag->name}}</td>
@@ -34,7 +34,7 @@
                 <form action="/items/{{$item->id}}" method="post">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button>Delete Task</button>
+                    <button>Delete Item</button>
                 </form>
             </td>
             </tr>

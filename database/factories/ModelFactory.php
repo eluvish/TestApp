@@ -23,7 +23,7 @@ $factory->define(myCloset\User::class, function (Faker\Generator $faker) {
 $factory->define(myCloset\Item::class, function (Faker\Generator $faker) {
     return [
         // 'name' => $faker->image($dir = 'images', $width = 300, $height = 250),
-        'name' => $faker->imageUrl($width = 300, $height = 250),
+        'src' => $faker->imageUrl($width = 300, $height = 250),
         'user_id' => rand(1,8),
     ];
 });
