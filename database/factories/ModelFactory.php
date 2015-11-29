@@ -19,3 +19,17 @@ $factory->define(Testbed\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(Testbed\Item::class, function (Faker\Generator $faker) {
+    return [
+        // 'name' => $faker->image($dir = 'images', $width = 300, $height = 250),
+        'name' => $faker->imageUrl($width = 300, $height = 250),
+        'user_id' => rand(1,8),
+    ];
+});
+
+$factory->define(Testbed\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->ColorName,
+    ];
+});

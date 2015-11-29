@@ -13,10 +13,23 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        
+
+        // create two default users
         $this->call(UsersTableSeeder::class);
-        $this->call(ItemsTableSeeder::class);
+
+        // generate additional users
+        factory(Testbed\User::class,8)->create();
+
+        // generate items and connect them to users
+        factory(Testbed\Item::class,64)->create();
+
+        // $this->call(ItemsTableSeeder::class);
+
+        // Auto generate colors then call seeder for other stuff
+        factory(Testbed\Tag::class,64)->create();
         $this->call(TagsTableSeeder::class);
+
+
         $this->call(ItemTagTableSeeder::class);
 
 
