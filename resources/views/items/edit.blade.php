@@ -3,12 +3,20 @@
 @section('head')
 <style>
 table, th, td {
-    border: 1px solid black;
+
+    margin:auto;
 }
 
 th, td {
     padding: 10px;
 }
+
+input[type=text] {
+    width: 80px;
+    margin-top: 12px;
+    font-size: 1em;
+}
+
 </style>
 @stop
 
@@ -17,10 +25,14 @@ th, td {
 <div class="container">
     <table align="center">
         <tr>
-            <td rowspan="{{count($item->tags)+1}}"><img align="center" src="http://localhost/{{$item->src}}"></td>
+            <td rowspan="{{count($item->tags)+2}}"><img align="center" src="http://localhost/{{$item->src}}"></td>
             @foreach($item->tags as $tag)
                 <tr>
-                    <td><button type="button" class="btn btn-success btn-sm btn-block">{{$tag->name}}</button></td>
+
+                    <td>
+                        <button type="button" class="btn btn-success btn-sm btn-block">{{$tag->name}}</button>
+                    </td>
+
                     <td>
                         <form action="/tags/unlink" method="post">
                             {{ csrf_field() }}
@@ -29,9 +41,26 @@ th, td {
                         <button type="submit" class="btn btn-danger btn-xs" value="X">X</button>
                         </form>
                     </td>
+
                 </tr>
             @endforeach
+                <tr>
+                <td>
+                    <div class="form-group">
+                        <form action="/tags/link" method="post">
+                            {{ csrf_field() }}
+                            {!! Form::hidden('item_id', $item->id) !!}
+                        <input class="form-control input-sm" type="text" placeholder="Tag" id="inputSmall" name="tag">
+                    </div>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-xs btn-primary">Add</button>
+                </form>
+                </td>
+            </tr>
+
         </tr>
+
         <tr>
             <td colspan="{{count($item->tags)+3}}">
                 <form action="/items/{{$item->id}}" method="post">
@@ -46,23 +75,6 @@ th, td {
     </table>
 </div>
 
-<br><br><br><br><br><br><br><br><br>
-<center>
-<form action="/items/{{$item->id}}" method="post">
-    {{ csrf_field() }}
-    {{ method_field('PATCH') }}
-    {!! Form::hidden('id', $item->id) !!}
-    <input type="text" name="tag" placeholder="shirt" style="width: 100px;" />
-    <input type="submit" value="Add Tag">
-</form>
-
-<div class="row">
-    <p>Tags:
-        @foreach($item->tags as $tag)
-            <li>{{$tag->name}}
-        @endforeach
-</div>
-</center>
 
 @if(count($errors) > 0)
     <ul class='errors'>

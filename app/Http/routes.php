@@ -26,6 +26,8 @@ Route::get('/', function () {
 
 // Tags
     Route::post('/tags/unlink', 'TagsController@unlink');
+    Route::post('/tags/link', 'TagsController@link');
+
 
 # Show login form (dont need?, make it redirect?)
 Route::get('/login', 'Auth\AuthController@getLogin');

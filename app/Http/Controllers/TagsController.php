@@ -17,4 +17,18 @@ class TagsController extends Controller
         $item->tags()->detach($request->tag_id);
         return redirect::to('/items/'.$request->item_id);
     }
+
+    public function link(Request $request)
+    {
+        $item = \myCloset\Item::find($request->item_id);
+
+        $tag = new \myCloset\Tag();
+        $tag->name = $request->tag;
+        $tag->save();
+
+        //dd($item);
+        $item->tags()->attach($tag);
+
+        return redirect::to('/items/'.$request->item_id);
+    }
 }
