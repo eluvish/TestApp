@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>
-        @yield('title','Dev myCloser')
+        @yield('title','Dev myCloset')
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +25,12 @@
     <link rel="stylesheet" href="/css/bootstrap.css" media="screen">
     <link rel="stylesheet" href="/css/custom.min.css">
     <link rel="stylesheet" href="/css/myCloset.css">
+
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/custom.js"></script>
+
+
 
     {{-- Yield any page specific CSS files or anything else you might want in the <head> --}}
     @yield('head')
@@ -59,7 +65,7 @@
                         <a href="/items">List View</a>
                     </li>
                     <li>
-                        <a href="/tags">Tags</a>
+                        <a href="/create">Create an Outfit</a>
                     </li>
                     <li>
                         <a href="/random">Random</a>

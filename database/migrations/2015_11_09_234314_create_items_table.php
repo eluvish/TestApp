@@ -16,8 +16,10 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->unsigned();
-            $table->string('src');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('src');
+            $table->string('type');
+
         });
     }
 

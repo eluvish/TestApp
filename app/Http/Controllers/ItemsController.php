@@ -46,41 +46,45 @@ class ItemsController extends Controller
         $this->validate($request,['image' => 'mimes:jpeg,bmp,png',
                                     'image'=>'required']);
 
+        if (!$request->hasFile('image') and !$request->file('image')->isValid()) {
+            \Session::flash('flash_message','Image upload failed.');
+            return Redirect::back();
+        }
 
         // get user
         $user = \Auth::user();
 
         $filePath = 'images/';
 
-        if (!$request->hasFile('image') and !$request->file('image')->isValid()) {
-            \Session::flash('flash_message','Image upload failed.');
-            return Redirect::back();
-        }
-
         // instantiate object image
         $img = $request->image;
 
         // generate file name
-        $time = new \Carbon\Carbon;
-        $fileName = $time->toDateString() .'-'. rand(1111,9999).'.' .$img->getClientOriginalExtension();
-        $imgLoc = $filePath . $fileName;
+        $extension = $img->getClientOriginalExtension();
+
+        $fileName = sha1(time()).'.'.$extension;
 
         // save file to disk
         $request->file('image')->move($filePath, $fileName);
 
             //using interventionist/image for resizing
-            $intImg = \Image::make($imgLoc);
+            $intImg = \Image::make($filePath.$fileName);
 
             // resize the image to a height of 200 and constrain aspect ratio (auto width)
-            $intImg->resize(null, 200, function ($constraint) {
+            $intImg->resize(null, 280, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
             $intImg->save();
 
+        $imgLoc = '/'.$filePath.$fileName;
+
         // save to database
         $item = new \myCloset\Item();
-        $item->src = $imgLoc;
+        $item->src = '/'.$filePath.$fileName;
+        $item->type = $request->type;
+
+        //create a foreign key relationship item -> user.
         $item->user_id = $user->id;
         $item->save();
 
@@ -149,8 +153,21 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
+        //TODO: add code to detach tags
+
+        $item = \myCloset\Item::find($id);
+
+        if(is_null($item)) {
+            \Session::flash('flash_message', 'Item not found');
+            return redirect('/items');
+        }
+
+        if($item->tags()) {
+            $item->tags()->detach();
+        }
+
         // Delete tag association
-        $tags = \DB::table('item_tag')->where('item_id', $id)->delete();
+        // $tags = \DB::table('item_tag')->where('item_id', $id)->delete();
 
         // Delete the item
         \myCloset\Item::destroy($id);

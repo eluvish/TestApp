@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('head')
-    <link rel="stylesheet" href="/css/forms.css">
+
 @stop
 
 @section('content')
@@ -12,38 +12,46 @@
     *
     *
 -->
-    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <center>
-        <div class="wrapper">
-            <h1>Register For An Account</h1>
-            <p class="heading">To sign-up for a free basic account please provide us with some basic information using
-                the contact form below. Please use valid credentials.</p>
+
+<div class="container">
+    <div class="row">
+
+        <!-- left column spacer -->
+        <div class="col-lg-4"></div>
+
+        <!-- center column -data- -->
+        <div class="col-lg-4">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Register for an account</h3>
+                </div>
+
+            <div class="panel-body">
+
                 <form class="form" method="post" action='/register' accept-charset="UTF-8">
                     {!! csrf_field() !!}
-                    <input type="text" class="name" name="name" placeholder="Name" value="{{old('name')}}">
-                    <div>
-                        <p class="name-help">Please enter your first and last name.</p>
+
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" />
                     </div>
 
-                    <input type="email" class="email" name="email" placeholder="Email">
-                    <div>
-                        <p class="email-help">Please enter your current email address.</p>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd" name="password" />
                     </div>
 
-                    <input type="password" name="password" placeholder="Password">
-                    <div>
-                        <p class="email-help">Please enter your password:</p>
+                    <div class="form-group">
+                        <label for="pwd_confirm">Confirm Password:</label>
+                        <input type="password" name="password_confirmation" class="form-control" />
                     </div>
 
-                    <input type="password" name="password_confirmation" placeholder="Confirm Password">
-                    <div>
-                        <p class="email-help">Confirm your password.</p>
-                    </div>
-
-                    <input type="submit" class="submit" value="Register">
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
                 </form>
             </div>
+        </div>
+
             <br><br>
             @if(count($errors) > 0)
                 <ul class='errors'>
@@ -52,7 +60,17 @@
                     @endforeach
                 </ul>
             @endif
-        </center>
+        </div>
 
-<!-- End register.blade.php -->
+        <!-- right column spacer -->
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+<!--
+    *
+    *
+    End register.blade.php
+    *
+    *
+-->
 @stop

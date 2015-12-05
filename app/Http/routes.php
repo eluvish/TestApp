@@ -15,14 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/items','ItemsController@index');
     Route::get('/upload', 'ItemsController@create');
     Route::post('/upload', 'ItemsController@store');
     Route::get('/items/{id}', 'ItemsController@show');
     Route::patch('/items/{id}', 'ItemsController@update');
     Route::delete('/items/{id}', 'ItemsController@destroy');
-//});
+    // Tags
+    Route::post('/tags/unlink', 'TagsController@unlink');
+    Route::post('/tags/link', 'TagsController@link');
+
+    Route::get('/create', 'OutfitsController@index');
+});
 
 // Tags
     Route::post('/tags/unlink', 'TagsController@unlink');
@@ -43,19 +48,3 @@ Route::get('/register', 'Auth\AuthController@getRegister');
 
 # Process registration form
 Route::post('/register', 'Auth\AuthController@postRegister');
-
-Route::get('/confirm', function() {
-
-    # You may access the authenticated user via the Auth facade
-    $user = Auth::user();
-
-    if($user) {
-        echo 'You are logged in.';
-        dump($user->toArray());
-    } else {
-        echo 'You are not logged in.';
-    }
-
-    return;
-
-});

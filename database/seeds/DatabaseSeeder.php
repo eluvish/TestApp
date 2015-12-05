@@ -14,19 +14,20 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+
         // create two default users
         $this->call(UsersTableSeeder::class);
 
         // generate additional users
-        factory(myCloset\User::class,8)->create();
+        //factory(myCloset\User::class,8)->create();
 
         // generate items and connect them to users
-        factory(myCloset\Item::class,64)->create();
+        factory(myCloset\Item::class,30)->create();
 
-        // $this->call(ItemsTableSeeder::class);
+        $this->call(ItemsTableSeeder::class);
 
         // Auto generate colors then call seeder for other stuff
-        factory(myCloset\Tag::class,64)->create();
+        factory(myCloset\Tag::class,10)->create();
         $this->call(TagsTableSeeder::class);
 
 

@@ -22,9 +22,8 @@ $factory->define(myCloset\User::class, function (Faker\Generator $faker) {
 
 $factory->define(myCloset\Item::class, function (Faker\Generator $faker) {
     return [
-        // 'name' => $faker->image($dir = 'images', $width = 300, $height = 250),
-        'src' => $faker->imageUrl($width = 300, $height = 250),
-        'user_id' => rand(1,8),
+        'src' => '/images/'.basename($faker->image($dir = 'C:\xampp\htdocs\myCloset\public\images', $width = 320, $height = 240)),
+        'user_id' => rand(1,2),
     ];
 });
 
