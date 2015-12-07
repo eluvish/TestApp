@@ -30,7 +30,7 @@
                             <select class="form-control" name="type" id="sel1">
                                 <option>Top</option>
                                 <option>Bottom</option>
-                                <option>Shoes</option>
+                                <option>Shoe</option>
                                 <option>Accessory</option>
                             </select>
                         </div>

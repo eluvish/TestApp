@@ -39,9 +39,24 @@ input[type=text] {
         <div class="col-md-3"></div>
 
         <div class="col-md-6">
-            <h1 class="h1" style="text-align: center;">Add/Remove Tags</h1>
+            <h1 class="h1" style="text-align: center;">Edit Item</h1>
             <div class="col-md-6">
                 <img src="{{$item->src}}" class="img-thumbnail"/>
+                <br>
+                <form method="POST" action="/items/{{$item->id}}" role="form" accept-charset="UTF-8" enctype="multipart/form-data">
+                    {!! csrf_field() !!}
+                    {{ method_field('PATCH') }}
+                <div class="form-group">
+                    <label for="sel1">Worn:</label>
+                    <select class="form-control" name="type" id="sel1" onchange='this.form.submit()'>
+                        <option {{ ($item->type == "Top") ? "SELECTED" : ''}}>Top</option>
+                        <option {{ ($item->type == "Bottom") ? "SELECTED" : ''}}>Bottom</option>
+                        <option {{ ($item->type == "Shoe") ? "SELECTED" : ''}}>Shoes</option>
+                        <option {{ ($item->type == "Accessory") ? "SELECTED" : ''}}>Accessory</option>
+                    </select>
+                </div>
+            </form>
+
             </div>
 
             <div class="col-md-6">
@@ -75,6 +90,7 @@ input[type=text] {
                     <td>
                         <button type="submit" class="btn btn-xs btn-primary">Add</button>
                     </form>
+
                     </td>
                 </tr>
                 </table>

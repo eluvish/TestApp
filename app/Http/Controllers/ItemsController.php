@@ -70,8 +70,8 @@ class ItemsController extends Controller
             //using interventionist/image for resizing
             $intImg = \Image::make($filePath.$fileName);
 
-            // resize the image to a height of 200 and constrain aspect ratio (auto width)
-            $intImg->resize(null, 280, function ($constraint) {
+            // resize the image to a height of 280 and constrain aspect ratio (auto width)
+            $intImg->resize(480, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
@@ -129,19 +129,12 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // start with validation
-        $this->validate($request,['tag' => 'required']);
+        // Updates where the item is worn TODO: update image.
 
-        // get the item out of the database
         $item = \myCloset\Item::find($id);
+        $item->type = $request->type;
+        $item->save();
 
-        // create new tag Model
-        $tag = new \myCloset\Tag();
-        $tag->name = $request->tag;
-        //add Tag
-        $item->tags()->save($tag);
-
-        //dd($item);
         return redirect::to('/items/'.$id);
     }
 
