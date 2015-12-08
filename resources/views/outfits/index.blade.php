@@ -32,26 +32,26 @@
                     <div class="single-item-tops" style="text-align: center;">
 
                         @foreach($tops as $top)
-                            <div><img src="{{$top->src}}" id="{{$top->id}}" class="img-thumbnail" /></div>
+                            <div data-id="{{$top->id}}"><img src="{{$top->src}}" class="img-thumbnail" /></div>
                         @endforeach
 
                     </div>
                     <br>
                     <div class="single-item-bottoms">
                         @foreach($bottoms as $bottom)
-                            <div><img src="{{$bottom->src}}" id="{{$bottom->id}}" class="img-thumbnail" /></div>
+                            <div data-id="{{$bottom->id}}"><img src="{{$bottom->src}}" id="{{$bottom->id}}" class="img-thumbnail" /></div>
                         @endforeach
                     </div>
                     <br>
                     <div class="single-item-shoes">
                         @foreach($shoes as $shoe)
-                            <div><img src="{{$shoe->src}}" id="{{$shoe->id}}" class="img-thumbnail" /></div>
+                            <div data-id="{{$shoe->id}}"><img src="{{$shoe->src}}" id="{{$shoe->id}}" class="img-thumbnail" /></div>
                         @endforeach
                     </div>
                     <form method="POST" action="/outfits/create" class="myForm">
-                        <input type="hidden" name="top" class="top" value="">
-                        <input type="hidden" name="bottom" value="">
-                        <input type="hidden" name="shoe" value="">
+                        <input type="hidden" value="0" name="top" id="top">
+                        <input type="hidden" name="bottom" id="bottom" value="">
+                        <input type="hidden" name="shoe" id="shoe" value="">
                         <button type="submit" class="btn btn-primary disabled btn-block">Save Outfit</button>
                     </form>
 
@@ -71,12 +71,29 @@
         arrows: false,
         adaptiveHeight: true
     });
-
-//     $('.single-item-tops').on('afterChange', function(event, slick, currentSlide){
-//   confirm(currentSlide);
-// });
-
   });
+
+    $('.single-item-tops').on('afterChange', function(event, slick, currentSlide, nextSlide)
+    {
+      var elSlide = $(slick.$slides[currentSlide]);
+      var dbId = elSlide.data('id');
+      var elem = document.getElementById("top").value = dbId;
+    });
+
+    $('.single-item-bottoms').on('afterChange', function(event, slick, currentSlide, nextSlide)
+    {
+      var elSlide = $(slick.$slides[currentSlide]);
+      var dbId = elSlide.data('id');
+      var elem = document.getElementById("bottom").value = dbId;
+    });
+
+    $('.single-item-shoes').on('afterChange', function(event, slick, currentSlide, nextSlide)
+    {
+      var elSlide = $(slick.$slides[currentSlide]);
+      var dbId = elSlide.data('id');
+      var elem = document.getElementById("shoe").value = dbId;
+    });
+
 
   $(document).ready(function(){
     $('.single-item-bottoms').slick({

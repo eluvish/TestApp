@@ -66,10 +66,10 @@ class ItemsController extends Controller
 
         $fileName = sha1(time()).'.'.$extension;
 
-	// save file to disk
+	      // save file to disk
         $request->file('image')->move($filePath, $fileName);
 
-	$filePath = $filePath.'/'.$fileName;
+	         $filePath = $filePath.'/'.$fileName;
 
             //using interventionist/image for resizing
             $intImg = \Image::make($filePath);
