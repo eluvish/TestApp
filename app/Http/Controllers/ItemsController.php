@@ -42,6 +42,7 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
+
         // start with validation
         $this->validate($request,['image' => 'mimes:jpeg,bmp,png',
                                     'image'=>'required']);
@@ -54,7 +55,8 @@ class ItemsController extends Controller
         // get user
         $user = \Auth::user();
 
-        $filePath = 'images/';
+	// set path where the image will be saved
+	$filePath = 'images/';
 
         // instantiate object image
         $img = $request->image;
@@ -64,11 +66,13 @@ class ItemsController extends Controller
 
         $fileName = sha1(time()).'.'.$extension;
 
-        // save file to disk
+	// save file to disk
         $request->file('image')->move($filePath, $fileName);
 
+	$filePath = $filePath.'/'.$fileName;
+
             //using interventionist/image for resizing
-            $intImg = \Image::make($filePath.$fileName);
+            $intImg = \Image::make($filePath);
 
             // resize the image to a height of 280 and constrain aspect ratio (auto width)
             $intImg->resize(480, null, function ($constraint) {
@@ -77,11 +81,11 @@ class ItemsController extends Controller
 
             $intImg->save();
 
-        $imgLoc = '/'.$filePath.$fileName;
+        //$imgLoc = '/'.$filePath.$fileName;
 
         // save to database
         $item = new \myCloset\Item();
-        $item->src = '/'.$filePath.$fileName;
+        $item->src = '/'.$filePath;
         $item->type = $request->type;
 
         //create a foreign key relationship item -> user.
