@@ -22,7 +22,13 @@
                     <form method="POST" action="/upload" role="form" accept-charset="UTF-8" enctype="multipart/form-data">
                         {!! csrf_field() !!}
                         <div class="form-group">
+                            <label for="image">File Upload</label>
                             <input type="file" name="image" />
+                        </div>
+
+                        <div class="form-group">
+                        <label for="url">or URL</label>
+                            <input type="text" name="url" class="form-control" placeholder="http://"/>
                         </div>
 
                         <div class="form-group">

@@ -44,47 +44,81 @@ class ItemsController extends Controller
     {
 
         // start with validation
-        $this->validate($request,['image' => 'mimes:jpeg,bmp,png',
-                                    'image'=>'required']);
+        // TODO: maybe get rid of mimes?
 
-        if (!$request->hasFile('image') and !$request->file('image')->isValid()) {
-            \Session::flash('flash_message','Image upload failed.');
-            return Redirect::back();
-        }
+        $rules = array(
+                    'image' => 'mimes:jpeg,bmp,png|image',
+                    'url' => 'required_without:image|url',
+                    'type' => 'required'
+        );
+
+        $this->validate($request,$rules);
 
         // get user
         $user = \Auth::user();
 
-	// set path where the image will be saved
-	$filePath = 'images/';
+        // set path where the image will be saved
+        $filePath = 'images';
 
-        // instantiate object image
-        $img = $request->image;
+        //if a url was submitted
+        if ($request->url) {
 
-        // generate file name
-        $extension = $img->getClientOriginalExtension();
+            $urlFile = file_get_contents($request->url);
+            $extension = pathinfo($request->url, PATHINFO_EXTENSION);
+            $fileName = sha1(time()).'.'.$extension;
 
-        $fileName = sha1(time()).'.'.$extension;
+            //ready for interventionist and save file to disk
+            $filePath = $filePath.'/'.$fileName;
 
-	      // save file to disk
-        $request->file('image')->move($filePath, $fileName);
+            $save = file_put_contents($filePath, $urlFile);
 
-	         $filePath = $filePath.'/'.$fileName;
+            // Error handling in case php coulnd't save the file.
+            if(!file_exists($filePath)) {
+                return 'Fatal error: could not save file';
+            }
+        }
 
-            //using interventionist/image for resizing
-            $intImg = \Image::make($filePath);
+        // if an image was uploaded
+        if($request->image) {
 
-            // resize the image to a height of 280 and constrain aspect ratio (auto width)
-            $intImg->resize(480, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+            // generate file name
+            $extension = $request->image->getClientOriginalExtension();
+            $fileName = sha1(time()).'.'.$extension;
 
-            $intImg->save();
+            // save file to disk
+            $request->file('image')->move($filePath, $fileName);
+            $filePath = $filePath.'/'.$fileName;
+        }
 
-        //$imgLoc = '/'.$filePath.$fileName;
+/*
+    *
+    *
+    Image manipulation and resizing
+    *
+    *
+*/
 
+        //using interventionist/image for resizing
+        $intImg = \Image::make($filePath);
+
+        // resize the image to a height of 280 and constrain aspect ratio (auto width)
+        $intImg->resize(480, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        $intImg->save();
+
+/*
+*
+*
+    Saving path info and where worn (type) to the database)
+*
+*
+*/
         // save to database
         $item = new \myCloset\Item();
+
+        // this iteration definitely work on the server.
         $item->src = '/'.$filePath;
         $item->type = $request->type;
 
@@ -133,7 +167,8 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Updates where the item is worn TODO: update image.
+        // Updates where the item is worn
+        // TODO: update image or img url
 
         $item = \myCloset\Item::find($id);
         $item->type = $request->type;
@@ -150,7 +185,7 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //TODO: add code to detach tags
+        //TODO: Delete file from server.
 
         $item = \myCloset\Item::find($id);
 
@@ -159,14 +194,25 @@ class ItemsController extends Controller
             return redirect('/items');
         }
 
+        // delete the slash at the start of the $item->src
+        $pathToDelete = substr($item->src, 1);
+
+        // delete the item from disk
+        if(file_exists($pathToDelete)) {
+            //echo "File Exists...";
+            unlink($pathToDelete);
+            //return 'File Deleted';
+        }
+        else {
+            \Session::flash('flash_message','Delete failed: File does not exist');
+            return Redirect::to('/items/');
+        }
+
+        // delete the pivot table assocation
         if($item->tags()) {
             $item->tags()->detach();
         }
-
-        // Delete tag association
-        // $tags = \DB::table('item_tag')->where('item_id', $id)->delete();
-
-        // Delete the item
+        // Delete the item from database
         \myCloset\Item::destroy($id);
 
         \Session::flash('flash_message','Your item was successfully deleted.');

@@ -5,8 +5,10 @@
 @stop
 
 @section('head')
+<!-- Only for outfits -> index.blade.php -->
     <link rel="stylesheet" type="text/css" href="./css/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="./css/slick/slick-theme.css"/>
+    <!-- End index.blade.php -->
 @stop
 
 @section('content')
@@ -66,6 +68,7 @@
 
 <script type="text/javascript">
 
+// Handles top image slider
   $(document).ready(function(){
     $('.single-item-tops').slick({
         arrows: false,
@@ -73,6 +76,23 @@
     });
   });
 
+// Handles middle image slider
+  $(document).ready(function(){
+    $('.single-item-bottoms').slick({
+        arrows: false,
+        adaptiveHeight: true
+    });
+  });
+
+// Handles shoe image slider
+  $(document).ready(function(){
+    $('.single-item-shoes').slick({
+        arrows: false,
+        adaptiveHeight: true
+    });
+  });
+
+  // Anytime the user changes the photo (Swipes/arrow) these 3 functions change the <input> value of the 'Save Outfit' form.
     $('.single-item-tops').on('afterChange', function(event, slick, currentSlide, nextSlide)
     {
       var elSlide = $(slick.$slides[currentSlide]);
@@ -94,20 +114,6 @@
       var elem = document.getElementById("shoe").value = dbId;
     });
 
-
-  $(document).ready(function(){
-    $('.single-item-bottoms').slick({
-        arrows: false,
-        adaptiveHeight: true
-    });
-  });
-
-  $(document).ready(function(){
-    $('.single-item-shoes').slick({
-        arrows: false,
-        adaptiveHeight: true
-    });
-  });
 </script>
 
 <!--
