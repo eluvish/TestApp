@@ -15,7 +15,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Upload Item Image</h3>
+                    <h3 class="panel-title">Add an Item</h3>
                 </div>
                 <div class="panel-body">
 

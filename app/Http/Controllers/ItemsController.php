@@ -18,7 +18,6 @@ class ItemsController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        //dd($user);
         $items = \myCloset\Item::where('user_id','=',$user->id)->with('tags')->get();
         return view('items.show')->with('items', $items);
 
@@ -101,7 +100,7 @@ class ItemsController extends Controller
         //using interventionist/image for resizing
         $intImg = \Image::make($filePath);
 
-        // resize the image to a height of 280 and constrain aspect ratio (auto width)
+        // resize the image to a width of 480 and constrain aspect ratio (auto width)
         $intImg->resize(480, null, function ($constraint) {
             $constraint->aspectRatio();
         });
@@ -121,8 +120,6 @@ class ItemsController extends Controller
         // this iteration definitely work on the server.
         $item->src = '/'.$filePath;
         $item->type = $request->type;
-
-        //create a foreign key relationship item -> user.
         $item->user_id = $user->id;
         $item->save();
 
@@ -143,7 +140,20 @@ class ItemsController extends Controller
         // get item instance from database with associated tags
         $item = \myCloset\Item::where('id',$id)->with('tags')->first();
 
-        return view('items.edit')->with(['item' => $item]);
+        // confirm item exists.
+        if(is_null($item)) {
+            \Session::flash('flash_message','Item does not exist. Why not add one?');
+            return Redirect::to('/upload');
+        }
+
+        // confirm item owner
+        if(\Auth::user()->id == $item->user_id){
+            return view('items.edit')->with(['item' => $item]);
+        }
+        else {
+            \Session::flash('flash_message','You are not authorized to view this item.');
+            return Redirect::to('/items');
+        }
     }
 
     /**
@@ -190,7 +200,7 @@ class ItemsController extends Controller
         $item = \myCloset\Item::find($id);
 
         if(is_null($item)) {
-            \Session::flash('flash_message', 'Item not found');
+            \Session::flash('flash_message', 'Item not found.');
             return redirect('/items');
         }
 
@@ -204,7 +214,7 @@ class ItemsController extends Controller
             //return 'File Deleted';
         }
         else {
-            \Session::flash('flash_message','Delete failed: File does not exist');
+            \Session::flash('flash_message','Delete failed: File does not exist.');
             return Redirect::to('/items/');
         }
 

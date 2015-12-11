@@ -13,7 +13,6 @@ class TagsController extends Controller
     public function unlink(Request $request)
     {
         $item = \myCloset\Item::find($request->item_id);
-        //dd($item);
         $item->tags()->detach($request->tag_id);
         return redirect::to('/items/'.$request->item_id);
     }
@@ -28,8 +27,17 @@ class TagsController extends Controller
         $tag->name = $request->tag;
         $tag->save();
 
+        // create the pivot table relationship
         $item->tags()->attach($tag);
 
         return redirect::to('/items/'.$request->item_id);
+    }
+
+    public function show($name)
+    {
+        //TODO: display all items by tag
+        $items = \myCloset\Item::where('user_id','=',\Auth::user()->id)->with('tags')->get();
+        dd($items);
+        return "Tag View";
     }
 }

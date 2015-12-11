@@ -22,17 +22,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/items/{id}', 'ItemsController@show');
     Route::patch('/items/{id}', 'ItemsController@update');
     Route::delete('/items/{id}', 'ItemsController@destroy');
+
     // Tags
     Route::post('/tags/unlink', 'TagsController@unlink');
     Route::post('/tags/link', 'TagsController@link');
+    Route::get('/tags/{name}', 'TagsController@show');
 
+    // Outfits
     Route::get('/create', 'OutfitsController@index');
 });
-
-// Tags
-    Route::post('/tags/unlink', 'TagsController@unlink');
-    Route::post('/tags/link', 'TagsController@link');
-
 
 # Show login form (dont need?, make it redirect?)
 Route::get('/login', 'Auth\AuthController@getLogin');

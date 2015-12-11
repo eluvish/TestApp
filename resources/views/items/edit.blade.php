@@ -6,14 +6,15 @@ myCloset - Add/Remove Tags
 
 @section('head')
 <style>
+
 table, th, td {
     vertical-align:baseline;
     margin:auto;
 }
 
 th, td {
-    padding-bottom: 10px;
-    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-right: 5px;
 }
 
 input[type=text] {
@@ -61,55 +62,60 @@ input[type=text] {
 
             <div class="col-md-6">
 
-                <table style="background:transparent;">
-                    @foreach($item->tags as $tag)
-                        <tr>
-                            <td>
-                                <button type="button" class="btn btn-success btn-sm btn-block">{{$tag->name}}</button>
-                            </td>
 
-                            <td>
-                                <form action="/tags/unlink" method="post">
-                                    {{ csrf_field() }}
-                                    {!! Form::hidden('item_id', $item->id) !!}
-                                    {!! Form::hidden('tag_id', $tag->id) !!}
-                                <button type="submit" class="btn btn-danger btn-xs" value="X">X</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    <tr>
-                    <td>
-                        <div class="form-group">
-                            <form action="/tags/link" method="post">
-                                {{ csrf_field() }}
-                                {!! Form::hidden('item_id', $item->id) !!}
-                            <input class="form-control input-sm" type="text" placeholder="Tag" name="tag">
-                        </div>
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-xs btn-primary">Add</button>
-                    </form>
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Tags</h3>
+                  </div>
+                  <div class="panel-body">
+                      <table style="background:transparent;">
+                          @foreach($item->tags as $tag)
+                              <tr>
+                                  <td>
+                                      <a href="/tags/{{$tag->name}}" class="btn btn-primary btn-sm btn-block">{{$tag->name}}</a>
+                                  </td>
 
-                    </td>
-                </tr>
-                </table>
+                                  <td>
+                                      <form action="/tags/unlink" method="post">
+                                          {{ csrf_field() }}
+                                          {!! Form::hidden('item_id', $item->id) !!}
+                                          {!! Form::hidden('tag_id', $tag->id) !!}
+                                      <button type="submit" class="btn btn-danger btn-xs" value="X">X</button>
+                                      </form>
+                                  </td>
+                              </tr>
+                          @endforeach
+                          <tr>
+                          <td>
+                              <div class="form-group">
+                                  <form action="/tags/link" method="post">
+                                      {{ csrf_field() }}
+                                      {!! Form::hidden('item_id', $item->id) !!}
+                                  <input class="form-control input-sm" type="text" autofocus placeholder="Tag" name="tag">
+                              </div>
+                          </td>
+                          <td>
+                              <button type="submit" class="btn btn-xs btn-default">Add</button>
+                          </form>
 
+                          </td>
+                      </tr>
+                      </table>
+                  </div>
+                </div>
+                            @if(count($errors) > 0)
+                                <ul class='errors'>
+                                    @foreach ($errors->all() as $error)
+                                        <li><span class='fa fa-exclamation-circle'></span> {{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
             </div>
         </div>
         <div class="col-md-3"></div>
     </div>
 </div>
 
-
-
-            @if(count($errors) > 0)
-                <ul class='errors'>
-                    @foreach ($errors->all() as $error)
-                        <li><span class='fa fa-exclamation-circle'></span> {{ $error }}</li>
-                    @endforeach
-                </ul>
-            @endif
 
 <!--
     *

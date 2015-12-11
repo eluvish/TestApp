@@ -25,7 +25,7 @@
         <div class="col-md-4"></div>
         <div class="col-md-4">
 
-            <div class="panel panel-primary"  style="text-align: center;">
+            <div class="panel panel-primary" style="text-align: center;">
                 <div class="panel-heading">
                     <h3 class="panel-title">Create an Outfit!</h3>
                 </div>
