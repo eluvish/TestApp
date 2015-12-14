@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Redirect;
 
 class ItemsController extends Controller
 {
+    //TODO: remove admin before publishing to web
+
+    public function admin()
+    {
+      $user = \Auth::user();
+      $items = \myCloset\Item::where('user_id','=',$user->id)->with('tags')->get();
+      return view('items.admin')->with('items', $items);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +27,12 @@ class ItemsController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        $items = \myCloset\Item::where('user_id','=',$user->id)->with('tags')->get();
+        $items = \myCloset\Item::where('user_id','=',$user->id)
+                                  ->orderBy('type')
+                                  ->get();
+
+        //TODO: implement a sorting algorithm for top, bottom, shoe, accessory
+
         return view('items.show')->with('items', $items);
 
     }
@@ -73,7 +87,7 @@ class ItemsController extends Controller
 
             // Error handling in case php coulnd't save the file.
             if(!file_exists($filePath)) {
-                return 'Fatal error: could not save file';
+                return 'Fatal error: could not save file.';
             }
         }
 
@@ -89,23 +103,9 @@ class ItemsController extends Controller
             $filePath = $filePath.'/'.$fileName;
         }
 
-/*
-    *
-    *
-    Image manipulation and resizing
-    *
-    *
-*/
-
         //using interventionist/image for resizing
-        $intImg = \Image::make($filePath);
+        $intImg = \Image::make($filePath)->fit(400,300)->save();
 
-        // resize the image to a width of 480 and constrain aspect ratio (auto width)
-        $intImg->resize(480, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-
-        $intImg->save();
 
 /*
 *

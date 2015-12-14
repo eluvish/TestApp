@@ -5,44 +5,31 @@
 @stop
 
 @section('content')
-<center>
+<!-- image gallery code from http://startbootstrap.com/template-overviews/thumbnail-gallery/ -->
 
+@if($items->isEmpty())
 <div class="container">
-  <h2>Bordered Table</h2>
-  <p>The .table-bordered class adds borders to a table:</p>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Thumbnail</th>
-        <th>imgPath</th>
-        <th>Tags</th>
-      </tr>
-    </thead>
-    <tbody>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 style="text-align: center;">You don't have any items. Why not <a href="/upload">add</a> some?</h1>
+        </div>
+    </div>
+</div>
+@else
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 style="text-align: center;">All My Items</h1>
+        </div>
 
         @foreach($items as $item)
-        <tr>
-            <td> {{ $item->user_id }} </td>
-            <td> <a href="/items/{{$item->id}}"><img src="{{$item->src}}" width="150" height="100" class="img-thumbnail"></a>
-            <td> {{ $item->src }} </td>
-
-            @foreach($item->tags as $tag)
-                <td>{{$tag->name}}</td>
-            @endforeach
-            <td>
-                <form action="/items/{{$item->id}}" method="post">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button>Delete Item</button>
-                </form>
-            </td>
-            </tr>
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a class="thumbnail" href="/items/{{$item->id}}">
+                <img class="img-responsive" src="{{$item->src}}" alt="" width="400" height="300" />
+            </a>
+        </div>
         @endforeach
-
-    </tbody>
-  </table>
-</div>
-
-</center>
+      </div>
+    </div>
+@endif
 @stop

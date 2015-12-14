@@ -198,7 +198,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
         'Form'=> 'Illuminate\Html\FormFacade',
-    	'HTML'=> 'Illuminate\Html\HtmlFacade',
+    	  'HTML'=> 'Illuminate\Html\HtmlFacade',
         'Image' => 'Intervention\Image\Facades\Image',
 
     ],

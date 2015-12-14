@@ -19,7 +19,6 @@ th, td {
 
 input[type=text] {
     width: 100px;
-
     font-size: 1em;
 }
 
@@ -57,7 +56,13 @@ input[type=text] {
                     </select>
                 </div>
             </form>
-
+            <div class="form-group">
+            <form action="/items/{{$item->id}}" method="post">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <button class="btn-block btn btn-danger">Delete Item</button>
+            </form>
+          </div>
             </div>
 
             <div class="col-md-6">
@@ -72,7 +77,7 @@ input[type=text] {
                           @foreach($item->tags as $tag)
                               <tr>
                                   <td>
-                                      <a href="/tags/{{$tag->id}}" class="btn btn-primary btn-sm btn-block">{{$tag->name}}</a>
+                                      <a href="/tags/{{$tag->name}}" class="btn btn-primary btn-sm btn-block">{{$tag->name}}</a>
                                   </td>
 
                                   <td>

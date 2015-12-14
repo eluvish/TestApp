@@ -35,17 +35,16 @@ class TagsController extends Controller
         return redirect::to('/items/'.$request->item_id);
     }
 
-    public function show($id)
+    public function show($name)
     {
-        //TODO: display all items by tag
-        //$items = \myCloset\Item::where('user_id', \Auth::user()->id)->with('tags')->get();
-        $user_id = \Auth::user()->id;
-        $items = \myCloset\Item::where('user_id','=',\Auth::user()->id)->whereHas('tags', function($q) {
-            $q->where('name', 'brown');
+        // get items that have $name tag
+        $items = \myCloset\Item::where('user_id','=',\Auth::user()->id)->whereHas('tags', function($q) use ($name) {
+            $q->where('name', $name);
             })->with('tags')->get();
-//$items = mysql_query("SELECT items.* FROM items INNER JOIN item_tag ON items.item_id = item_tag.item_id WHERE item_tag.tag_id = $id AND items.user_id = $user_id");
-dd($items);
 
-        return "Tag View";
+//$items = mysql_query("SELECT items.* FROM items INNER JOIN item_tag ON items.item_id = item_tag.item_id WHERE item_tag.tag_id = $id AND items.user_id = $user_id");
+
+
+        return view('items.bytag')->with(['items' => $items, 'name' => $name]);
     }
 }

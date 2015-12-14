@@ -26,10 +26,13 @@ Route::group(['middleware' => 'auth'], function () {
     // Tags
     Route::post('/tags/unlink', 'TagsController@unlink');
     Route::post('/tags/link', 'TagsController@link');
-    Route::get('/tags/{id}', 'TagsController@show');
+    Route::get('/tags/{name}', 'TagsController@show');
 
-    // Outfits
+    // Outfits - feature to be created
     Route::get('/create', 'OutfitsController@index');
+
+    // Admin
+    Route::get('/admin', 'ItemsController@admin');
 });
 
 # Show login form (dont need?, make it redirect?)
