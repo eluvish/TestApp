@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Tags
     Route::post('/tags/unlink', 'TagsController@unlink');
     Route::post('/tags/link', 'TagsController@link');
-    Route::get('/tags/{name}', 'TagsController@show');
+    Route::get('/tags/{id}', 'TagsController@show');
 
     // Outfits
     Route::get('/create', 'OutfitsController@index');

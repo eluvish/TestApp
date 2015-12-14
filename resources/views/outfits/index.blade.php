@@ -65,6 +65,10 @@
         <div class="col-md-4"></div>
     </div>
 </div>
+@stop
+
+@section('body')
+<script type="text/javascript" src="/js/slick/slick.min.js"></script>
 
 <script type="text/javascript">
 

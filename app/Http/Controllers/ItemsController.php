@@ -178,7 +178,6 @@ class ItemsController extends Controller
     public function update(Request $request, $id)
     {
         // Updates where the item is worn
-        // TODO: update image or img url
 
         $item = \myCloset\Item::find($id);
         $item->type = $request->type;

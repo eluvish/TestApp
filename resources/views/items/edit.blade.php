@@ -72,7 +72,7 @@ input[type=text] {
                           @foreach($item->tags as $tag)
                               <tr>
                                   <td>
-                                      <a href="/tags/{{$tag->name}}" class="btn btn-primary btn-sm btn-block">{{$tag->name}}</a>
+                                      <a href="/tags/{{$tag->id}}" class="btn btn-primary btn-sm btn-block">{{$tag->name}}</a>
                                   </td>
 
                                   <td>

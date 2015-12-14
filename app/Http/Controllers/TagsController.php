@@ -12,6 +12,8 @@ class TagsController extends Controller
 {
     public function unlink(Request $request)
     {
+        //IDEA: change this to DELETE?
+
         $item = \myCloset\Item::find($request->item_id);
         $item->tags()->detach($request->tag_id);
         return redirect::to('/items/'.$request->item_id);
@@ -33,11 +35,17 @@ class TagsController extends Controller
         return redirect::to('/items/'.$request->item_id);
     }
 
-    public function show($name)
+    public function show($id)
     {
         //TODO: display all items by tag
-        $items = \myCloset\Item::where('user_id','=',\Auth::user()->id)->with('tags')->get();
-        dd($items);
+        //$items = \myCloset\Item::where('user_id', \Auth::user()->id)->with('tags')->get();
+        $user_id = \Auth::user()->id;
+        $items = \myCloset\Item::where('user_id','=',\Auth::user()->id)->whereHas('tags', function($q) {
+            $q->where('name', 'brown');
+            })->with('tags')->get();
+//$items = mysql_query("SELECT items.* FROM items INNER JOIN item_tag ON items.item_id = item_tag.item_id WHERE item_tag.tag_id = $id AND items.user_id = $user_id");
+dd($items);
+
         return "Tag View";
     }
 }
