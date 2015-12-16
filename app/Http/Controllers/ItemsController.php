@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use myCloset\Http\Requests;
 use myCloset\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use Auth;
+use myCloset;
+use Session;
 
 class ItemsController extends Controller
 {
@@ -14,8 +17,8 @@ class ItemsController extends Controller
 
     public function admin()
     {
-      $user = \Auth::user();
-      $items = \myCloset\Item::where('user_id','=',$user->id)->with('tags')->get();
+      $user = Auth::user();
+      $items = myCloset\Item::where('user_id','=',$user->id)->with('tags')->get();
       return view('items.admin')->with('items', $items);
     }
 
@@ -26,14 +29,21 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $user = \Auth::user();
-        $items = \myCloset\Item::where('user_id','=',$user->id)
-                                  ->orderBy('type')
-                                  ->get();
+        $user = Auth::user();
+
+        $items = myCloset\Item::where('user_id', '=', Auth::user()->id)->get();
+
+        $tops = $items->where('type', 'Top');
+        $bottoms = $items->where('type', "Bottom");
+        $shoes = $items->where('type', "Shoe");
 
         //TODO: implement a sorting algorithm for top, bottom, shoe, accessory
 
-        return view('items.show')->with('items', $items);
+        return view('items.show')
+          ->with(['tops' => $tops,
+                  'bottoms' => $bottoms,
+                  'shoes' => $shoes
+                ]);
 
     }
 
@@ -115,7 +125,7 @@ class ItemsController extends Controller
 *
 */
         // save to database
-        $item = new \myCloset\Item();
+        $item = new myCloset\Item();
 
         // this iteration definitely work on the server.
         $item->src = '/'.$filePath;
@@ -123,7 +133,7 @@ class ItemsController extends Controller
         $item->user_id = $user->id;
         $item->save();
 
-        \Session::flash('flash_message','Your item was uploaded successfully!');
+        Session::flash('flash_message','Your item was uploaded successfully!');
 
         return Redirect::to('/items/'.$item->id)->with($item->id);
 
@@ -138,20 +148,20 @@ class ItemsController extends Controller
     public function show($id)
     {
         // get item instance from database with associated tags
-        $item = \myCloset\Item::where('id',$id)->with('tags')->first();
+        $item = myCloset\Item::where('id',$id)->with('tags')->first();
 
         // confirm item exists.
         if(is_null($item)) {
-            \Session::flash('flash_message','Item does not exist. Why not add one?');
+            Session::flash('flash_message','Item does not exist. Why not add one?');
             return Redirect::to('/upload');
         }
 
         // confirm item owner
-        if(\Auth::user()->id == $item->user_id){
+        if(Auth::user()->id == $item->user_id){
             return view('items.edit')->with(['item' => $item]);
         }
         else {
-            \Session::flash('flash_message','You are not authorized to view this item.');
+            Session::flash('flash_message','You are not authorized to view this item.');
             return Redirect::to('/items');
         }
     }
@@ -179,7 +189,7 @@ class ItemsController extends Controller
     {
         // Updates where the item is worn
 
-        $item = \myCloset\Item::find($id);
+        $item = myCloset\Item::find($id);
         $item->type = $request->type;
         $item->save();
 
@@ -196,10 +206,10 @@ class ItemsController extends Controller
     {
         //TODO: Delete file from server.
 
-        $item = \myCloset\Item::find($id);
+        $item = myCloset\Item::find($id);
 
         if(is_null($item)) {
-            \Session::flash('flash_message', 'Item not found.');
+            Session::flash('flash_message', 'Item not found.');
             return redirect('/items');
         }
 
@@ -213,7 +223,7 @@ class ItemsController extends Controller
             //return 'File Deleted';
         }
         else {
-            \Session::flash('flash_message','Delete failed: File does not exist.');
+            Session::flash('flash_message','Delete failed: File does not exist.');
             return Redirect::to('/items/');
         }
 
@@ -222,9 +232,9 @@ class ItemsController extends Controller
             $item->tags()->detach();
         }
         // Delete the item from database
-        \myCloset\Item::destroy($id);
+        myCloset\Item::destroy($id);
 
-        \Session::flash('flash_message','Your item was successfully deleted.');
+        Session::flash('flash_message','Your item was successfully deleted.');
 
         return Redirect::to('/items/');
         //

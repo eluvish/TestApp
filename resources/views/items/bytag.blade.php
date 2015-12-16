@@ -27,25 +27,25 @@ h1 {
 
 <div class="container">
   <div class="row">
-
-    <div class="col-md-4 col-md-offset-4">
-      <h1 style="text-align: center;">Tag: {{$name}}</h1>
-
-      @foreach($items as $item)
-      <div class="item">
-        <a href="/items/{{$item->id}}"><img src="{{$item->src}}" class="img-thumbnail img-responsive"/></a><br><br>
-
-        @foreach($item->tags as $tag)
-        <a href="/tags/{{$tag->name}}" class="btn btn-primary btn-sm">{{$tag->name}}</a>
-        @endforeach
-
-      </div>
-      <br><br>
-
-      @endforeach
-
+    <div class="col-lg-12">
+        <h1 style="text-align: center;">Tag: {{$name}}</h1>
     </div>
+@if($items->isEmpty())
 
+  <br>
+  <h2 style="text-align: center;">No items found under this tag.</h2>
+
+@else
+
+    @foreach($items as $item)
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="/items/{{$item->id}}">
+            <img class="img-responsive" src="{{$item->src}}" alt="" width="400" height="300" />
+        </a>
+    </div>
+    @endforeach
+
+@endif
   </div>
 </div>
 
