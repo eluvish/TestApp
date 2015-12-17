@@ -24,9 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/items/{id}', 'ItemsController@destroy');
 
     // Tags
-    Route::post('/tags/unlink', 'TagsController@unlink');
-    Route::post('/tags/link', 'TagsController@link');
     Route::get('/tags/{name}', 'TagsController@show');
+    Route::delete('/tags/unlink', 'TagsController@unlink');
+    Route::post('/tags/link', 'TagsController@link');
 
     // Outfits - feature to be created
     Route::get('/create', 'OutfitsController@index');

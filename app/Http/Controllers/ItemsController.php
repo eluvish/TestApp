@@ -29,17 +29,13 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-
         $items = myCloset\Item::where('user_id', '=', Auth::user()->id)->get();
 
-        $tops = $items->where('type', 'Top');
-        $bottoms = $items->where('type', "Bottom");
-        $shoes = $items->where('type', "Shoe");
+        $tops = $items->where('type', 'top');
+        $bottoms = $items->where('type', "bottom");
+        $shoes = $items->where('type', "shoe");
 
-        //TODO: implement a sorting algorithm for top, bottom, shoe, accessory
-
-        return view('items.show')
+        return view('items.showAll')
           ->with(['tops' => $tops,
                   'bottoms' => $bottoms,
                   'shoes' => $shoes
@@ -77,22 +73,26 @@ class ItemsController extends Controller
 
         $this->validate($request,$rules);
 
-        // get user
-        $user = \Auth::user();
-
         // set path where the image will be saved
         $filePath = 'images';
 
         //if a url was submitted
         if ($request->url) {
 
+            $allowed = ['jpg','jpeg','png','gif'];
             $urlFile = file_get_contents($request->url);
             $extension = pathinfo($request->url, PATHINFO_EXTENSION);
+            //dd($extension);
+            if(!in_array($extension, $allowed)) {
+                Session::flash('flash_message','The URL you entered is not an image or does not have a valid file extension. Try downloading the file and uploading it manually.');
+                return Redirect::to('/upload');
+            }
+
+            // set unique file name
             $fileName = sha1(time()).'.'.$extension;
 
             //ready for interventionist and save file to disk
             $filePath = $filePath.'/'.$fileName;
-
             $save = file_put_contents($filePath, $urlFile);
 
             // Error handling in case php coulnd't save the file.
@@ -114,23 +114,16 @@ class ItemsController extends Controller
         }
 
         //using interventionist/image for resizing
+        // TODO: different resizing for different types (i.e. pants need more height than width)
         $intImg = \Image::make($filePath)->fit(400,300)->save();
 
-
-/*
-*
-*
-    Saving path info and where worn (type) to the database)
-*
-*
-*/
         // save to database
         $item = new myCloset\Item();
 
         // this iteration definitely work on the server.
         $item->src = '/'.$filePath;
-        $item->type = $request->type;
-        $item->user_id = $user->id;
+        $item->type = strtolower($request->type);
+        $item->user_id = Auth::user()->id;
         $item->save();
 
         Session::flash('flash_message','Your item was uploaded successfully!');
@@ -166,17 +159,17 @@ class ItemsController extends Controller
         }
     }
 
-    /**
+    /** TODO: Delete this
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        // This is supposed to be a GET request.
-        return "in edit";
-    }
+    // public function edit($id)
+    // {
+    //     // This is supposed to be a GET request.
+    //     return "in edit";
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -187,12 +180,15 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // TODO: implement update image
+
         // Updates where the item is worn
 
         $item = myCloset\Item::find($id);
-        $item->type = $request->type;
+        $item->type = strtolower($request->type);
         $item->save();
 
+        Session::flash('flash_message','Updated to worn: '.$item->type);
         return redirect::to('/items/'.$id);
     }
 
@@ -204,8 +200,7 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //TODO: Delete file from server.
-
+        // get the item to be deleted and confirm it exists.
         $item = myCloset\Item::find($id);
 
         if(is_null($item)) {
@@ -218,13 +213,11 @@ class ItemsController extends Controller
 
         // delete the item from disk
         if(file_exists($pathToDelete)) {
-            //echo "File Exists...";
             unlink($pathToDelete);
-            //return 'File Deleted';
         }
         else {
             Session::flash('flash_message','Delete failed: File does not exist.');
-            return Redirect::to('/items/');
+            return Redirect::to('/items');
         }
 
         // delete the pivot table assocation
@@ -236,7 +229,7 @@ class ItemsController extends Controller
 
         Session::flash('flash_message','Your item was successfully deleted.');
 
-        return Redirect::to('/items/');
+        return Redirect::to('/items');
         //
     }
 }

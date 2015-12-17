@@ -11,36 +11,8 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-            $data = ['shirt',
-            'top',
-            'boots',
-            'gloves',
-            'leather',
-            'hands',
-            'button down',
-            'oxford',
-            'khakis',
-            'pants',
-            'work',
-            'casual',
-            'shorts',
-            'pink',
-            'polo',
-            'Boat Shoe',
-            'Court Shoe',
-            'Derby Shoe',
-            'Mocassin',
-            'Sneaker',
-            'Slipper',
-            'Boot',
-            'Sandal',
-            'Oxford',
-            'Cap-Toe',
-            'Fall',
-            'Winter',
-            'Spring',
-            'Summer',
-    ];
+            $data = ['brown','black','blue','casual','work','fall','summer','shorts','jeans'];
+
 
             foreach($data as $tagName) {
                 $tag = new \myCloset\Tag();

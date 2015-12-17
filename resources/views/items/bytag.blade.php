@@ -1,61 +1,39 @@
 @extends('layouts.master')
 
 @section('title')
-myCloset - View by Tag
+myCloset - Tag: {{$name}}
 @stop
 
 @section('head')
 <style>
-h1 {
-  text-align: center;
-}
-
-.item {
+h2 {
   text-align: center;
 }
 </style>
 @stop
 
 @section('content')
-<!--
-    *
-    *
-    START bytag.blade.php
-    *
-    *
--->
+<!-- START bytag.blade.php -->
+
 
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-        <h1 style="text-align: center;">Tag: {{$name}}</h1>
+        <h1 style="text-align: center;">Tag: {{$name}}</h1><br>
     </div>
-@if($items->isEmpty())
+
+@if($tops->isEmpty() && $bottoms->isEmpty() && $shoes->isEmpty())
 
   <br>
-  <h2 style="text-align: center;">No items found under this tag.</h2>
+  <h2 style="text-align: center;">No items found.</h2>
 
 @else
-
-    @foreach($items as $item)
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-        <a class="thumbnail" href="/items/{{$item->id}}">
-            <img class="img-responsive" src="{{$item->src}}" alt="" width="400" height="300" />
-        </a>
-    </div>
-    @endforeach
-
+    @include('_partials.gallery')
 @endif
-  </div>
+
 </div>
 
 
-<!--
-    *
-    *
-    END bytag.blade.php
-    *
-    *
--->
+<!-- END bytag.blade.php -->
 
 @stop

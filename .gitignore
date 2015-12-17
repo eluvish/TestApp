@@ -4,4 +4,4 @@ Homestead.yaml
 Homestead.json
 .env
 /public/images
-/database/factories
+/database/migrations/2015_12_09_163410_create_outfits_table.php

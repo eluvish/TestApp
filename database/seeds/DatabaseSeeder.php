@@ -17,21 +17,23 @@ class DatabaseSeeder extends Seeder
 
         // create two default users
         $this->call(UsersTableSeeder::class);
+        $this->call(TagsTableSeeder::class);
+        $this->call(ItemsTableSeeder::class);
 
         // generate additional users
         //factory(myCloset\User::class,8)->create();
 
         // generate items and connect them to users
-        factory(myCloset\Item::class,30)->create();
+        //factory(myCloset\Item::class,30)->create();
 
-        $this->call(ItemsTableSeeder::class);
+
 
         // Auto generate colors then call seeder for other stuff
-        factory(myCloset\Tag::class,10)->create();
-        $this->call(TagsTableSeeder::class);
+        //factory(myCloset\Tag::class,10)->create();
 
 
-        $this->call(ItemTagTableSeeder::class);
+
+        //$this->call(ItemTagTableSeeder::class);
 
 
         Model::reguard();

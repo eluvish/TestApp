@@ -5,10 +5,8 @@
 @stop
 
 @section('head')
-<!-- Only for outfits -> index.blade.php -->
     <link rel="stylesheet" type="text/css" href="./css/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="./css/slick/slick-theme.css"/>
-    <!-- End index.blade.php -->
 @stop
 
 @section('content')
@@ -19,7 +17,6 @@
     *
     *
 -->
-
 <div class="container">
     <div class="row">
         <div class="col-md-4"></div>
@@ -41,26 +38,27 @@
                     <br>
                     <div class="single-item-bottoms">
                         @foreach($bottoms as $bottom)
-                            <div data-id="{{$bottom->id}}"><img src="{{$bottom->src}}" id="{{$bottom->id}}" class="img-thumbnail" /></div>
+                            <div data-id="{{$bottom->id}}"><img src="{{$bottom->src}}" class="img-thumbnail" /></div>
                         @endforeach
                     </div>
                     <br>
                     <div class="single-item-shoes">
                         @foreach($shoes as $shoe)
-                            <div data-id="{{$shoe->id}}"><img src="{{$shoe->src}}" id="{{$shoe->id}}" class="img-thumbnail" /></div>
+                            <div data-id="{{$shoe->id}}"><img src="{{$shoe->src}}" class="img-thumbnail" /></div>
                         @endforeach
                     </div>
+
                     <form method="POST" action="/outfits/create" class="myForm">
-                        <input type="hidden" value="0" name="top" id="top">
+                        <input type="hidden"  name="top" id="top" value="">
                         <input type="hidden" name="bottom" id="bottom" value="">
                         <input type="hidden" name="shoe" id="shoe" value="">
-                        <button type="submit" class="btn btn-primary disabled btn-block">Save Outfit</button>
                     </form>
+
+                        <button type="submit" class="btn btn-primary disabled btn-block">Save Outfit (feature not implemented)</button>
+
 
                 </div>
             </div>
-
-
         </div>
         <div class="col-md-4"></div>
     </div>

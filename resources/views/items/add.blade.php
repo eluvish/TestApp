@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-default btn-lg btn-block">Upload</button>
+                            <button type="submit" class="btn btn-default btn-lg btn-block">Add to Closet</button>
                         </div>
 
                     </form>

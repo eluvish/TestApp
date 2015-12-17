@@ -11,24 +11,24 @@
 |
 */
 
-$factory->define(myCloset\User::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
-    ];
-});
+// $factory->define(myCloset\User::class, function (Faker\Generator $faker) {
+//     return [
+//         'name' => $faker->name,
+//         'email' => $faker->email,
+//         'password' => bcrypt(str_random(10)),
+//         'remember_token' => str_random(10),
+//     ];
+// });
 
-$factory->define(myCloset\Item::class, function (Faker\Generator $faker) {
-    return [
-        'src' => '/images/'.basename($faker->image($dir = 'C:\xampp\htdocs\myCloset\public\images', $width = 320, $height = 240)),
-        'user_id' => rand(1,2),
-    ];
-});
+// $factory->define(myCloset\Item::class, function (Faker\Generator $faker) {
+//     return [
+//         'src' => '/images/'.basename($faker->image($dir = 'C:\xampp\htdocs\myCloset\public\images', $width = 400, $height = 300)),
+//         'user_id' => rand(1,2),
+//     ];
+// });
 
-$factory->define(myCloset\Tag::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->ColorName,
-    ];
-});
+// $factory->define(myCloset\Tag::class, function (Faker\Generator $faker) {
+//     return [
+//         'name' => $faker->ColorName,
+//     ];
+// });

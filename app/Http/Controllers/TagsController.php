@@ -42,9 +42,15 @@ class TagsController extends Controller
             $q->where('name', $name);
             })->with('tags')->get();
 
-//$items = mysql_query("SELECT items.* FROM items INNER JOIN item_tag ON items.item_id = item_tag.item_id WHERE item_tag.tag_id = $id AND items.user_id = $user_id");
+            $tops = $items->where('type', 'top');
+            $bottoms = $items->where('type', "bottom");
+            $shoes = $items->where('type', "shoe");
 
-
-        return view('items.bytag')->with(['items' => $items, 'name' => $name]);
+            return view('items.bytag')
+              ->with(['tops' => $tops,
+                      'bottoms' => $bottoms,
+                      'shoes' => $shoes,
+                      'name' => $name
+                    ]);
     }
 }
