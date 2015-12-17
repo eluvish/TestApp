@@ -59,8 +59,12 @@ class ItemsTableSeeder extends Seeder
                         'http://smtus.imageg.net/SMTNA_25/pimg/pSMTNA-500057211_250_main_t360x450.jpg'];
 
 
-
-        $filePath = 'images';
+        if(env('APP_ENV','local')) {
+            $filePath = 'C:\xampp\htdocs\myCloset\public\images';
+        }
+        else {
+            $filePath = 'images';
+        }
 
         $tags = \myCloset\Tag::all();
 
@@ -69,7 +73,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
 
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
@@ -94,7 +98,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -116,7 +120,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -138,7 +142,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -160,7 +164,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -182,7 +186,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -204,7 +208,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -226,7 +230,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -248,7 +252,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -270,7 +274,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'/'.$fileName;
+            $fileToSave = $filePath.'\\'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
