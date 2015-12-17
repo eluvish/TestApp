@@ -60,7 +60,7 @@ class ItemsTableSeeder extends Seeder
 
 
 
-        $filePath = 'images';
+        $filePath = public_path().'/images';
 
         $tags = \myCloset\Tag::all();
 
