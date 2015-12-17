@@ -127,7 +127,7 @@ h3 {
     </div>
 
 @if(count($errors) > 0)
-    @include('errors.validation')
+    @include('_partials.validation')
 @endif
 
 </div>
