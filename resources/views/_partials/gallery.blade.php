@@ -2,7 +2,7 @@
 
     @if(!$tops->isEmpty())
     <div class="row">
-    <h2>Tops</h2>
+    <a name="tops"><h2>Tops</h2></a>
     @foreach($tops as $top)
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
         <a class="thumbnail" href="/items/{{$top->id}}">

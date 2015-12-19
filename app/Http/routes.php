@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/items','ItemsController@index');
+
+    // Items
+    Route::get('/items','ItemsController@showAll');
     Route::get('/upload', 'ItemsController@create');
     Route::post('/upload', 'ItemsController@store');
     Route::get('/items/{id}', 'ItemsController@show');
@@ -25,27 +27,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Tags
     Route::get('/tags/{name}', 'TagsController@show');
-    Route::delete('/tags/unlink', 'TagsController@unlink');
     Route::post('/tags/link', 'TagsController@link');
+    Route::delete('/tags/unlink', 'TagsController@unlink');
 
-    // Outfits - feature to be created
+    // Outfits - feature half implemented, can't save outfits
     Route::get('/create', 'OutfitsController@index');
-
-    // Admin
-    Route::get('/admin', 'ItemsController@admin');
 });
 
-# Show login form (dont need?, make it redirect?)
+# Authorization
 Route::get('/login', 'Auth\AuthController@getLogin');
-
-# Process login form
 Route::post('/login', 'Auth\AuthController@postLogin');
-
-# Process logout
 Route::get('/logout', 'Auth\AuthController@getLogout');
-
-# Show registration form
 Route::get('/register', 'Auth\AuthController@getRegister');
-
-# Process registration form
 Route::post('/register', 'Auth\AuthController@postRegister');

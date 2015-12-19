@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@section('head')
-
+@section('title')
+myCloset - Log In
 @stop
 
 @section('content')

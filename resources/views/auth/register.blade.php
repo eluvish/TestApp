@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="pwd">Password:</label>
+                        <label>Password:</label>
                         <input type="password" class="form-control" id="pwd" name="password" />
                     </div>
 

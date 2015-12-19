@@ -103,7 +103,7 @@ h3 {
       </div>
     </div>
     <div class="form-group">
-            <form method="POST" action="/items/{{$item->id}}" role="form" accept-charset="UTF-8" enctype="multipart/form-data">
+            <form method="POST" action="/items/{{$item->id}}" accept-charset="UTF-8" enctype="multipart/form-data">
                 {!! csrf_field() !!}
                 {{ method_field('PATCH') }}
 

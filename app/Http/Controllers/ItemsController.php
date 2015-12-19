@@ -23,11 +23,13 @@ class ItemsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Method: GET
+     * Powers the image gallery. Retrieves all items belonging to the user into
+     * collection. Divides by 'type' and passes to them view.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showAll()
     {
         $items = myCloset\Item::where('user_id', '=', Auth::user()->id)->get();
 
@@ -40,11 +42,11 @@ class ItemsController extends Controller
                   'bottoms' => $bottoms,
                   'shoes' => $shoes
                 ]);
-
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Method: GET
+     * Shows the add item view.
      *
      * @return \Illuminate\Http\Response
      */
@@ -54,7 +56,13 @@ class ItemsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Method: POST
+     *
+     * Process input from the add an item form (add.blade.php).
+     * Can handle both file uploads and URLs (but with rough parsing).
+     * Processes file and saves it to disk.
+     * Makes database entry.
+     *
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -79,10 +87,12 @@ class ItemsController extends Controller
         //if a url was submitted
         if ($request->url) {
 
+            // additional validation to make sure it has an allowed extension
+            // many image links dont have extensions nowadays
             $allowed = ['jpg','jpeg','png','gif'];
             $urlFile = file_get_contents($request->url);
             $extension = pathinfo($request->url, PATHINFO_EXTENSION);
-            //dd($extension);
+
             if(!in_array($extension, $allowed)) {
                 Session::flash('flash_message','The URL you entered is not an image or does not have a valid file extension. Try downloading the file and uploading it manually.');
                 return Redirect::to('/upload');
@@ -101,12 +111,11 @@ class ItemsController extends Controller
             }
         }
 
-        // if an image was uploaded
+        // if a file image was uploaded
         if($request->image) {
 
             // generate file name
-            $extension = $request->image->getClientOriginalExtension();
-            $fileName = sha1(time()).'.'.$extension;
+            $fileName = sha1(time()).'.'.$request->image->getClientOriginalExtension();
 
             // save file to disk
             $request->file('image')->move($filePath, $fileName);
@@ -114,26 +123,40 @@ class ItemsController extends Controller
         }
 
         //using interventionist/image for resizing
-        // TODO: different resizing for different types (i.e. pants need more height than width)
+
         $intImg = \Image::make($filePath)->fit(400,300)->save();
 
-        // save to database
+        // TODO: different resizing for different types (i.e. pants need more height than width)
+        // $width = $intImg->width();
+        // $height = $intImg->height();
+        // if the item is a bottom (pants, etc) it gets resize differently.
+        // if($width < $height && (strcmp($request->type, "Bottom") == 0)) {
+        //     $intImg->fit(300,400)->encode('jpg', 75);
+        // }
+        // else {
+        //     $intImg->fit(400,300, function ($constraint) {
+        //         $constraint->upsize();
+        //     })->encode('jpg', 75);
+        // }
+
+        // instantiate new Item
         $item = new myCloset\Item();
 
         // this iteration definitely work on the server.
         $item->src = '/'.$filePath;
         $item->type = strtolower($request->type);
         $item->user_id = Auth::user()->id;
+
+        //save to database
         $item->save();
 
         Session::flash('flash_message','Your item was uploaded successfully!');
 
         return Redirect::to('/items/'.$item->id)->with($item->id);
-
     }
 
     /**
-     * Display the specified resource.
+     * Display a single item
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -141,16 +164,10 @@ class ItemsController extends Controller
     public function show($id)
     {
         // get item instance from database with associated tags
-        $item = myCloset\Item::where('id',$id)->with('tags')->first();
-
-        // confirm item exists.
-        if(is_null($item)) {
-            Session::flash('flash_message','Item does not exist. Why not add one?');
-            return Redirect::to('/upload');
-        }
+        $item = myCloset\Item::where('id',$id)->with('tags')->firstOrFail();
 
         // confirm item owner
-        if(Auth::user()->id == $item->user_id){
+        if(Auth::user()->id == $item->user_id) {
             return view('items.edit')->with(['item' => $item]);
         }
         else {
@@ -159,20 +176,9 @@ class ItemsController extends Controller
         }
     }
 
-    /** TODO: Delete this
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function edit($id)
-    // {
-    //     // This is supposed to be a GET request.
-    //     return "in edit";
-    // }
-
     /**
-     * Update the specified resource in storage.
+     * Method: PATCH
+     * Updates the where worn (type). TODO: implement update image feature
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -180,8 +186,6 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // TODO: implement update image
-
         // Updates where the item is worn
 
         $item = myCloset\Item::find($id);
@@ -193,7 +197,10 @@ class ItemsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Method: DELETE
+     *
+     * Deletes an item record from the database, removes tag associations, and
+     * removes the item from disk.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -208,28 +215,30 @@ class ItemsController extends Controller
             return redirect('/items');
         }
 
-        // delete the slash at the start of the $item->src
-        $pathToDelete = substr($item->src, 1);
-
-        // delete the item from disk
-        if(file_exists($pathToDelete)) {
-            unlink($pathToDelete);
-        }
-        else {
-            Session::flash('flash_message','Delete failed: File does not exist.');
-            return Redirect::to('/items');
-        }
-
         // delete the pivot table assocation
         if($item->tags()) {
             $item->tags()->detach();
         }
+
         // Delete the item from database
         myCloset\Item::destroy($id);
 
-        Session::flash('flash_message','Your item was successfully deleted.');
+        // delete the slash at the start of the $item->src
+        $pathToDelete = substr($item->src, 1);
 
+        // delete the item from disk
+        if(file_exists($pathToDelete))
+        {
+            unlink($pathToDelete);
+        }
+        else
+        {
+            Session::flash('flash_message','Delete failed: File does not exist.');
+            return Redirect::to('/items');
+        }
+
+        Session::flash('flash_message','Your item was successfully deleted.');
         return Redirect::to('/items');
-        //
+
     }
 }
