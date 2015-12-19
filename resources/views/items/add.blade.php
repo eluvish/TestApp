@@ -37,7 +37,7 @@
                                 <option>Top</option>
                                 <option>Bottom</option>
                                 <option>Shoe</option>
-                                <option>Accessory</option>
+                                <!-- <option>Accessory</option> -->
                             </select>
                         </div>
 

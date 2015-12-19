@@ -6,34 +6,31 @@ myCloset - Tag: {{$name}}
 
 @section('head')
 <style>
-h2 {
+h1,h2 {
   text-align: center;
 }
 </style>
 @stop
 
 @section('content')
+
 <!-- START bytag.blade.php -->
-
-
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
-        <h1 style="text-align: center;">Tag: {{$name}}</h1><br>
+        <h1>Tag: {{$name}}</h1><br>
     </div>
 
 @if($tops->isEmpty() && $bottoms->isEmpty() && $shoes->isEmpty())
 
   <br>
-  <h2 style="text-align: center;">No items found.</h2>
+  <h2>No items found.</h2>
 
 @else
     @include('_partials.gallery')
 @endif
 
 </div>
-
-
 <!-- END bytag.blade.php -->
 
 @stop

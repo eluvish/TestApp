@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>
-        @yield('title','Dev myCloset')
+        @yield('title','myCloset - a Wardrobe Manager')
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,7 +37,7 @@
 
 <!-- padding below navbar -->
 <div class="row">
-    <div class="col-lg-2 col-lg-offset-5" style="padding: 10px;">
+    <div class="col-md-2 col-md-offset-5" style="padding: 10px;">
         @if(\Session::has('flash_message'))
           @include('_partials.flashMsg')
         @endif
@@ -50,9 +50,6 @@
 
     {{-- Yield any page specific JS files or anything else you might want at the end of the body --}}
     @yield('body')
-
-
-
 
     @include ('_partials.footer')
 

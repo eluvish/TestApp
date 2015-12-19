@@ -1,27 +1,44 @@
-## Laravel PHP Framework
+## 19 December 2015
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Project 4: myCloset
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+* Live: URL: http://mycloset.eliluvish.com
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Project Description
+The app is a wardrobe manager and outfit creator. It allows the user to add images of their clothing, tag each item, view an image gallery of their items, or sort by tag. It also has
+a half implement create an outfit feature which allows the user to swipe through their items top/bottom/shoe and save the outfit (the save part is not yet implemented).
 
-## Official Documentation
+The app was created in Laravel 5.1 and uses PHP, HTML, and CSS (bootstrap).
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## Screencast Demonstration:
+* URL:
 
-## Contributing
+## Details for the instruction team: Test credentials
+* username: jamal@harvard.edu
+* password: helloworld
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+This account is set up with content to show the features of the app.
 
-## Security Vulnerabilities
+jill@harvard.edu is an empty account.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+##### Relevant Information:
+* 4 tables: users, items, tags, item_tag.
+* CRUD interactions:
+  * Add an image or url.
+  * Show item (image + where worn + tags)
+  * Update where item worn (update image to be implemented);
+  * Delete record + image from server
+* Comprehensive (hopefully!) error validation server side.
 
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Plugins, Libraries, Packages or Outside Code:
+* Twitter bootstrap
+* fzaninotto/faker
+* barryvdh/laravel-debugbar
+* illuminate/html
+* intervention/image -- for image manipulation (https://github.com/Intervention/image)
+* slick.js - for the create an outfit feature (http://kenwheeler.github.io/slick/)
+* Image gallery code: (http://startbootstrap.com/template-overviews/thumbnail-gallery/)
+* Theme/Template from Bootswatch - Slate (https://bootswatch.com/slate/)
+* Help from a kind reddit user with the Eloquent query when showing all by tag.
+* Code for updated <input> tag in the create an outfit feature found at: (http://stackoverflow.com/questions/28546163/getting-data-attributes-from-slides-in-slick-carousel/28546483#28546483)
+  * Although save feature not yet implemented.

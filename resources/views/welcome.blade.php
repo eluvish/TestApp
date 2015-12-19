@@ -4,10 +4,6 @@
 myCloset - a Wardrobe Manager App
 @stop
 
-@section('head')
-
-@stop
-
 @section('content')
 
 <div class="container">

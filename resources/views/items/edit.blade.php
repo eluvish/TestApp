@@ -7,11 +7,6 @@ myCloset - Edit Item
 @section('head')
 <style>
 
-table, th, td {
-    vertical-align:baseline;
-    margin:auto;
-}
-
 th, td {
     padding-bottom: 5px;
     padding-right: 5px;
@@ -25,11 +20,7 @@ input[type=text] {
     text-align: center;
 }
 
-h1 {
-    text-align: center;
-}
-
-h3 {
+h1,h3 {
     text-align: center;
 }
 </style>
@@ -86,22 +77,26 @@ h3 {
                   </tr>
               @endforeach
               <tr>
-              <td>
-                  <div class="form-group">
+                  <td>
+
                       <form action="/tags/link" method="post">
-                          {{ csrf_field() }}
-                          {!! Form::hidden('item_id', $item->id) !!}
-                      <input class="form-control input-sm" type="text" autofocus placeholder="Tag" name="tag">
-                  </div>
-              </td>
-              <td>
-                  <button type="submit" class="btn btn-xs btn-info glyphicon glyphicon-ok"></button>
-              </form>
-              </td>
-          </tr>
+                          <div class="form-group">
+                              {{ csrf_field() }}
+                              {!! Form::hidden('item_id', $item->id) !!}
+                              <input class="form-control input-sm" type="text" autofocus placeholder="Tag" name="tag">
+
+                          </td>
+                          <td>
+                              <div class="form-group">
+                                  <button type="submit" class="btn btn-xs btn-info glyphicon glyphicon-ok"></button>
+                              </form>
+                          </div>
+                      </div>
+                  </td>
+              </tr>
           </table>
       </div>
-    </div>
+  </div>
     <div class="form-group">
             <form method="POST" action="/items/{{$item->id}}" accept-charset="UTF-8" enctype="multipart/form-data">
                 {!! csrf_field() !!}
@@ -113,7 +108,7 @@ h3 {
                     <option {{ ($item->type == "top") ? "SELECTED" : ''}}>Top</option>
                     <option {{ ($item->type == "bottom") ? "SELECTED" : ''}}>Bottom</option>
                     <option {{ ($item->type == "shoe") ? "SELECTED" : ''}}>Shoes</option>
-                    <option {{ ($item->type == "accessory") ? "SELECTED" : ''}}>Accessory</option>
+                    <!-- <option {{ ($item->type == "accessory") ? "SELECTED" : ''}}>Accessory</option> -->
                 </select>
             </div>
         </form>

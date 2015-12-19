@@ -13,15 +13,6 @@ use Session;
 
 class ItemsController extends Controller
 {
-    //TODO: remove admin before publishing to web
-
-    public function admin()
-    {
-      $user = Auth::user();
-      $items = myCloset\Item::where('user_id','=',$user->id)->with('tags')->get();
-      return view('items.admin')->with('items', $items);
-    }
-
     /**
      * Method: GET
      * Powers the image gallery. Retrieves all items belonging to the user into
@@ -107,7 +98,8 @@ class ItemsController extends Controller
 
             // Error handling in case php coulnd't save the file.
             if(!file_exists($filePath)) {
-                return 'Fatal error: could not save file.';
+                Session::flash('flash_message','Error: could not save file to server.');
+                return Redirect::to('/upload');
             }
         }
 
@@ -163,7 +155,8 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        // get item instance from database with associated tags
+        // get item instance from database with associated tags. Send 404 if Item
+        // doesn't exit or if user presses back button after deleting.
         $item = myCloset\Item::where('id',$id)->with('tags')->firstOrFail();
 
         // confirm item owner
@@ -233,8 +226,9 @@ class ItemsController extends Controller
         }
         else
         {
-            Session::flash('flash_message','Delete failed: File does not exist.');
-            return Redirect::to('/items');
+            // User doesn't need to know that we couldn't delete the file but
+            // we should so let's log it.
+            \Log::info('Could not delete file:'.$pathToDelete);
         }
 
         Session::flash('flash_message','Your item was successfully deleted.');

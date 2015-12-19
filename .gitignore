@@ -6,3 +6,5 @@ Homestead.json
 /public/images
 /database/migrations/2015_12_09_163410_create_outfits_table.php
 /database/seeds/ItemsTableSeeder-local.php
+ss
+/resources/views/items/admin.blade.php
