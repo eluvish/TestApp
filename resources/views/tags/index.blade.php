@@ -6,7 +6,7 @@
 
 @section('head')
 <style>
-a, h2{
+h2{
     text-align: center;
 }
 </style>
@@ -24,7 +24,7 @@ a, h2{
                 <h2> All tags </h2>
 
                 @foreach($tags as $tag)
-                <div class="col-lg-4"><a href="/tags/{{$tag}}" class="btn btn-default btn-block">{{$tag}}</a></div>
+                <div class="col-lg-4"><a href="/tags/{{$tag}}" class="btn btn-default btn-block" style="text-align:center;">{{$tag}}</a></div>
                 @endforeach
             @endif
         </div>

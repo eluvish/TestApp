@@ -14,9 +14,14 @@
                 <li>
                     <a href="/upload">Add Item</a>
                 </li>
-                <li>
-                    <a href="/items">Gallery</a>
-                </li>
+                <li class="dropdown">
+                    <a href="/items" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Gallery<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/items">All</a></li>
+                        <li><a href="/items">Tops</a></li>
+                        <li><a href="/items#bottoms">Bottoms</a></li>
+                        <li><a href="/items#shoes">Shoes</a></li>
+                    </ul>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Outfits<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">

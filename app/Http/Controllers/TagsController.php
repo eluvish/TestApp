@@ -34,7 +34,7 @@ class TagsController extends Controller
     public function link(Request $request)
     {
         // validation
-        $this->validate($request,['tag' => 'required|string|max:12']);
+        $this->validate($request,['tag' => 'required|string|max:16']);
 
         // retrieve item for tagging
         $item = myCloset\Item::find($request->item_id);
