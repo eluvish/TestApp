@@ -6,7 +6,7 @@
 
 ## Project Description
 The app is a wardrobe manager and outfit creator. It allows the user to add images of their clothing, tag each item, view an image gallery of their items, or sort by tag. It also has
-a half implement create an outfit feature which allows the user to swipe through their items top/bottom/shoe and save the outfit (the save part is not yet implemented).
+a create an outfit feature which allows the user to swipe through their items top/bottom/shoe and save the outfit. The site is mobile optimized so a lot of if it is top down.
 
 The app was created in Laravel 5.1 and uses PHP, HTML, and CSS (bootstrap).
 
@@ -41,4 +41,3 @@ jill@harvard.edu is an empty account.
 * Theme/Template from Bootswatch - Slate (https://bootswatch.com/slate/)
 * Help from a kind reddit user with the Eloquent query when showing all by tag.
 * Code for updated <input> tag in the create an outfit feature found at: (http://stackoverflow.com/questions/28546163/getting-data-attributes-from-slides-in-slick-carousel/28546483#28546483)
-  * Although save feature not yet implemented.

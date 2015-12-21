@@ -2,11 +2,11 @@
 
     @if(!$tops->isEmpty())
     <div class="row">
-    <a name="tops"><h2>Tops</h2></a>
+    <h2>Tops</h2>
     @foreach($tops as $top)
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
         <a class="thumbnail" href="/items/{{$top->id}}">
-            <img class="img-responsive" src="{{$top->src}}" alt="" width="400" height="300" />
+            <img class="img-responsive img-thumbnail"" src="{{$top->src}}" alt="" width="400" height="300" />
         </a>
     </div>
     @endforeach
@@ -19,7 +19,7 @@
     @foreach($bottoms as $bottom)
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
         <a class="thumbnail" href="/items/{{$bottom->id}}">
-            <img class="img-responsive" src="{{$bottom->src}}" alt="" width="400" height="300" />
+            <img class="img-responsive img-thumbnail" src="{{$bottom->src}}" alt="" width="400" height="300" />
         </a>
     </div>
     @endforeach
@@ -32,7 +32,7 @@
     @foreach($shoes as $shoe)
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
         <a class="thumbnail" href="/items/{{$shoe->id}}">
-            <img class="img-responsive" src="{{$shoe->src}}" alt="" width="400" height="300" />
+            <img class="img-responsive img-thumbnail"" src="{{$shoe->src}}" alt="" width="400" height="300" />
         </a>
     </div>
     @endforeach

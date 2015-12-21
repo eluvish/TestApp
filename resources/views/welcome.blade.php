@@ -4,6 +4,14 @@
 myCloset - a Wardrobe Manager App
 @stop
 
+@section('head')
+<style>
+h3 {
+    color: white;
+}
+</style>
+@stop
+
 @section('content')
 
 <div class="container">

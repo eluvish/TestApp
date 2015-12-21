@@ -1,4 +1,4 @@
-<div class="alert alert-info">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <p class="flash">{{ \Session::get('flash_message') }}</p>
+<div class="alert alert-dismissible alert-info">
+  <button type="button" class="close" data-dismiss="alert"><span class="glyphicon glyphicon-remove"></span></button>
+  <strong>{{ \Session::get('flash_message') }}</strong>
 </div>

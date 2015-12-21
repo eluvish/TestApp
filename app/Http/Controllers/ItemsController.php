@@ -22,7 +22,7 @@ class ItemsController extends Controller
      */
     public function showAll()
     {
-        $items = myCloset\Item::where('user_id', '=', Auth::user()->id)->get();
+        $items = Auth::user()->items()->get();
 
         $tops = $items->where('type', 'top');
         $bottoms = $items->where('type', "bottom");
@@ -118,29 +118,11 @@ class ItemsController extends Controller
 
         $intImg = \Image::make($filePath)->fit(400,300)->save();
 
-        // TODO: different resizing for different types (i.e. pants need more height than width)
-        // $width = $intImg->width();
-        // $height = $intImg->height();
-        // if the item is a bottom (pants, etc) it gets resize differently.
-        // if($width < $height && (strcmp($request->type, "Bottom") == 0)) {
-        //     $intImg->fit(300,400)->encode('jpg', 75);
-        // }
-        // else {
-        //     $intImg->fit(400,300, function ($constraint) {
-        //         $constraint->upsize();
-        //     })->encode('jpg', 75);
-        // }
-
         // instantiate new Item
         $item = new myCloset\Item();
-
-        // this iteration definitely work on the server.
         $item->src = '/'.$filePath;
         $item->type = strtolower($request->type);
-        $item->user_id = Auth::user()->id;
-
-        //save to database
-        $item->save();
+        Auth::user()->items()->save($item);
 
         Session::flash('flash_message','Your item was uploaded successfully!');
 
@@ -185,7 +167,7 @@ class ItemsController extends Controller
         $item->type = strtolower($request->type);
         $item->save();
 
-        Session::flash('flash_message','Updated to worn: '.$item->type);
+        Session::flash('flash_message','Updated.');
         return redirect::to('/items/'.$id);
     }
 

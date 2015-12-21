@@ -24,8 +24,8 @@ class CreateItemTagTable extends Migration
         $table->integer('tag_id')->unsigned();
 
         # Make foreign keys
-        $table->foreign('item_id')->references('id')->on('items');
-        $table->foreign('tag_id')->references('id')->on('tags');
+        $table->foreign('item_id')->references('id')->on('items')->OnDelete('cascade');
+        $table->foreign('tag_id')->references('id')->on('tags')->OnDelete('cascade');
         });
     }
     /**

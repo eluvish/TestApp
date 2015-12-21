@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -12,6 +11,8 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
+        echo "starting ItemsTableSeeder\n\n";
+
         $brownShoes = ['http://media03.toms.com/static/www/images/product/product_image_1450x1015_Hero/BrownLeatherMensSearcherBoots-10002763-1450x1015-H.jpg',
                        'http://static4.shop.indiatimes.com/images/products/additional/original/B2176309_View_5/fashion/casuals/upanah-brown-men-casual-shoes-3032-brown.jpg',
                        'http://shop.kulturpon.com/wp-content/uploads/2015/04/PAUL-PARKMAN-MENS-CHUKKA-BOOTS-BROWN-BORDEAUX7.jpeg'];
@@ -23,14 +24,15 @@ class ItemsTableSeeder extends Seeder
                         'http://i01.i.aliimg.com/wsphoto/v0/1068889017/Top-Quality-New-men-s-real-leather-ankle-boots-Formal-dress-shoes-lace-up-Black-Size.jpg'];
 
         $casualShoes = ['http://069a9d0f32c8741bc0ff-b1e398c78bcda56290a73740994050be.r94.cf2.rackcdn.com/a982e8b8-7c56-45ab-9688-298b424af71e__L.jpg',
-                        'http://www.supplierlist.com/prod_img/olksho7334/232423_Popular_Mens_Casual_Shoes.jpg',
                         'http://www.shareishoes.com/images/Adidas/NEO/12-adidas-NEO-CASUAL-MID-Mens-Canvas-SHOE_2.jpg',
                         'http://shoesclothing.co.uk/images/01/Mens-Casual-Shoes-Slip-Ons-Canvas-Loafers-Sneakers-Grey.jpg'];
 
         $workShirts = ['http://www.qmuniforms.com/photos/styles/SH211_1500_1.jpg',
                         'http://bigtopshirtshop.com/assets/images/all/Devon_And_Jones_D640_Burgundy_Mens_Crown_Collection_Gingham_Check_Long_Sleeve_Button_Down_Shirt.jpg',
                         'http://mensdressshirts.org/wp-content/uploads/2014/09/H2H-Mens-Oxford-Cotton-Slim-Fit-Dress-Button-down-Shirts-Long-Sleeve-WHITE-US-SAsia-M-KMTSTL0219-0.jpg',
-                        'http://store.cambriausa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/l/bluelsshirt_1__1.jpg'];
+                        'http://store.cambriausa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/l/bluelsshirt_1__1.jpg',
+                        'http://g01.a.alicdn.com/kf/HTB1f1SFIpXXXXaTXVXXq6xXFXXX6/Handsome-font-b-men-b-font-shirt-spring-and-summer-font-b-wear-b-font-leisure.jpg',
+                        'http://g02.a.alicdn.com/kf/HTB1J2jBIVXXXXauXFXXq6xXFXXXX/French-Cuff-Autumn-Spring-Stand-Collar-font-b-Men-b-font-font-b-Shirt-b-font.jpg'];
 
         $sweaters = ['http://cdna.lystit.com/photos/2013/08/01/brooks-brothers-kelly-green-country-club-sea-island-vneck-sweater-product-1-11269767-290055020_large_flex.jpeg',
                     'http://wooki.ca/wp-content/uploads/2013/12/3342D30054_7171_01.jpg',
@@ -47,7 +49,8 @@ class ItemsTableSeeder extends Seeder
                         'http://i.walmartimages.com/i/p/00/72/09/72/46/0072097246980_500X500.jpg'];
 
         $jeans = ['http://2.bp.blogspot.com/_q0Au1SbmpNk/TH-E7EEkMVI/AAAAAAAAAIo/1Ye7PXt9qrg/s1600/Men%27s+Jeans+With+Elegant+Look(2).jpg',
-                        'http://3.bp.blogspot.com/-EFdDKhhCFoc/TlU7-kS-W1I/AAAAAAAABGM/wKYa9bwdjM8/s1600/Men-Jeans.jpg'];
+                        'http://3.bp.blogspot.com/-EFdDKhhCFoc/TlU7-kS-W1I/AAAAAAAABGM/wKYa9bwdjM8/s1600/Men-Jeans.jpg',
+                        'http://www.express.com/cdn/responsive/visualnav/m-denim/m-4-kingston.jpg'];
 
         $casualPants = ['http://www.flatsevenshop.com/2713-flatseven_cloudzoom_big/mens-slim-fit-flat-front-stretch-chino-casual-pants-trousers-ch503.jpg',
                         'http://i01.i.aliimg.com/wsphoto/v0/1904752981_1/New-2014-Fashion-Multi-Pockets-Cargo-Pants-Men-Casual-Camouflage-100-Cotton-Military-Pants-Color-Khaki.jpg',
@@ -58,11 +61,7 @@ class ItemsTableSeeder extends Seeder
                         'http://i.stpost.com/jachs-dot-print-bermuda-shorts-cotton-for-men-in-navy~p~7839r_01~1500.3.jpg',
                         'http://smtus.imageg.net/SMTNA_25/pimg/pSMTNA-500057211_250_main_t360x450.jpg'];
 
-
-
         $filePath = public_path().'/images';
-
-        $tags = \myCloset\Tag::all();
 
         foreach ($brownShoes as $url) {
 
@@ -81,11 +80,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
 
@@ -104,11 +103,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($casualShoes as $url) {
@@ -126,11 +125,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($workShirts as $url) {
@@ -148,11 +147,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($sweaters as $url) {
@@ -170,11 +169,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($summerShirts as $url) {
@@ -192,11 +191,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($dressPants as $url) {
@@ -214,11 +213,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($jeans as $url) {
@@ -236,11 +235,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($casualPants as $url) {
@@ -258,11 +257,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($shorts as $url) {
@@ -280,11 +279,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
    }

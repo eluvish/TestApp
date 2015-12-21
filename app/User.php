@@ -18,7 +18,12 @@ class User extends Model implements AuthenticatableContract,
 
     public function items() {
         # With timetsamps() will ensure the pivot table has its created_at/updated_at fields automatically maintained
-        return $this->belongsToMany('\myCloset\Item')->withTimestamps();
+        return $this->HasMany('myCloset\Item');
+    }
+
+    public function outfits() {
+        # With timetsamps() will ensure the pivot table has its created_at/updated_at fields automatically maintained
+        return $this->HasMany('myCloset\Outfit');
     }
     /**
      * The database table used by the model.

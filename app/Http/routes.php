@@ -26,12 +26,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/items/{id}', 'ItemsController@destroy');
 
     // Tags
+    Route::get('/tags', 'TagsController@showAllTags');
     Route::get('/tags/{name}', 'TagsController@show');
     Route::post('/tags/link', 'TagsController@link');
     Route::delete('/tags/unlink', 'TagsController@unlink');
 
     // Outfits - feature half implemented, can't save outfits
     Route::get('/create', 'OutfitsController@index');
+    Route::post('/create', 'OutfitsController@store');
+    Route::get('/outfits', 'OutfitsController@showAllOutfits');
 });
 
 # Authorization

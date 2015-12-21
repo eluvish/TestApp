@@ -9,11 +9,11 @@ class Item extends Model
 
     public function tags() {
         # With timetsamps() will ensure the pivot table has its created_at/updated_at fields automatically maintained
-        return $this->belongsToMany('\myCloset\Tag')->withTimestamps();
+        return $this->belongsToMany('myCloset\Tag')->withTimestamps();
     }
 
-    public function users() {
-        return $this->belongsTo('\myCloset\Users');
+    public function user() {
+        return $this->belongsTo('myCloset\User');
     }
 
 }

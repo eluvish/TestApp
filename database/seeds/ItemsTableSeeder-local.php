@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -12,6 +11,8 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
+        echo "starting ItemsTableSeeder\n\n";
+
         $brownShoes = ['http://media03.toms.com/static/www/images/product/product_image_1450x1015_Hero/BrownLeatherMensSearcherBoots-10002763-1450x1015-H.jpg',
                        'http://static4.shop.indiatimes.com/images/products/additional/original/B2176309_View_5/fashion/casuals/upanah-brown-men-casual-shoes-3032-brown.jpg',
                        'http://shop.kulturpon.com/wp-content/uploads/2015/04/PAUL-PARKMAN-MENS-CHUKKA-BOOTS-BROWN-BORDEAUX7.jpeg'];
@@ -58,22 +59,25 @@ class ItemsTableSeeder extends Seeder
                         'http://i.stpost.com/jachs-dot-print-bermuda-shorts-cotton-for-men-in-navy~p~7839r_01~1500.3.jpg',
                         'http://smtus.imageg.net/SMTNA_25/pimg/pSMTNA-500057211_250_main_t360x450.jpg'];
 
+        echo "Arrays Set.\n\n";
 
-        if(env('APP_ENV','local')) {
-            $filePath = 'C:\xampp\htdocs\myCloset\public\images';
-        }
-        else {
-            $filePath = 'images';
-        }
+        // if(env('APP_ENV','local')) {
+        //     $filePath = 'C:\xampp\htdocs\myCloset\public\images';
+        // }
+        // else {
+        //     $filePath = 'images';
+        // }
 
-        $tags = \myCloset\Tag::all();
+        $filePath = public_path().'/images';
+
+        //$tags = \myCloset\Tag::all();
 
         foreach ($brownShoes as $url) {
 
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
 
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
@@ -85,11 +89,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
 
@@ -98,7 +102,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -108,11 +112,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($casualShoes as $url) {
@@ -120,7 +124,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -130,11 +134,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($workShirts as $url) {
@@ -142,7 +146,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -152,11 +156,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($sweaters as $url) {
@@ -164,7 +168,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -174,11 +178,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($summerShirts as $url) {
@@ -186,7 +190,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -196,11 +200,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($dressPants as $url) {
@@ -208,7 +212,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -218,11 +222,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($jeans as $url) {
@@ -230,7 +234,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -240,11 +244,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($casualPants as $url) {
@@ -252,7 +256,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -262,11 +266,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
         foreach ($shorts as $url) {
@@ -274,7 +278,7 @@ class ItemsTableSeeder extends Seeder
             $urlFile = file_get_contents($url);
             $extension = pathinfo($url, PATHINFO_EXTENSION);
             $fileName = mt_rand(0,99999).'.'.$extension;
-            $fileToSave = $filePath.'\\'.$fileName;
+            $fileToSave = $filePath.'/'.$fileName;
             $save = file_put_contents($fileToSave, $urlFile);
             $intImg = \Image::make($fileToSave)->fit(400,300)->save();
 
@@ -284,11 +288,11 @@ class ItemsTableSeeder extends Seeder
             $item->user_id = 2;
             $item->save();
 
-            for ($i = 0; $i < 2; $i++)
-            {
-                $tag = $tags->random();
-                $item->tags()->save($tag);
-            }
+            // for ($i = 0; $i < 2; $i++)
+            // {
+            //     $tag = $tags->random();
+            //     $item->tags()->save($tag);
+            // }
         }
 
    }

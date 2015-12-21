@@ -71,8 +71,9 @@ h1,h3 {
                               {{ method_field('DELETE') }}
                               {!! Form::hidden('item_id', $item->id) !!}
                               {!! Form::hidden('tag_id', $tag->id) !!}
-                          <button type="submit" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button>
+                          <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
                           </form>
+
                       </td>
                   </tr>
               @endforeach
@@ -84,7 +85,7 @@ h1,h3 {
                               {{ csrf_field() }}
                               {!! Form::hidden('item_id', $item->id) !!}
                               <input class="form-control input-sm" type="text" autofocus placeholder="Tag" name="tag">
-
+                          </div>
                           </td>
                           <td>
                               <div class="form-group">
@@ -119,6 +120,7 @@ h1,h3 {
             {{ method_field('DELETE') }}
             <button class="btn-block btn btn-danger">Delete Item</button>
         </form>
+        <p class="text-warning"><strong>Warning: Deleting this item will delete any outfits associated with this item.</strong></p>
     </div>
 
 @if(count($errors) > 0)

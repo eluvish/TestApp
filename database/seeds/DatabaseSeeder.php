@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
         // create two default users
         $this->call(UsersTableSeeder::class);
-        $this->call(TagsTableSeeder::class);
+        //$this->call(TagsTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
 
         // generate additional users
