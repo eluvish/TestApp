@@ -11,7 +11,7 @@ a create an outfit feature which allows the user to swipe through their items to
 The app was created in Laravel 5.1 and uses PHP, HTML, and CSS (bootstrap).
 
 ## Screencast Demonstration:
-* URL:
+* URL: http://screencast.com/t/fBFgpNSIEkX
 
 ## Details for the instruction team: Test credentials
 * username: jamal@harvard.edu
@@ -38,6 +38,6 @@ jill@harvard.edu is an empty account.
 * intervention/image -- for image manipulation (https://github.com/Intervention/image)
 * slick.js - for the create an outfit feature (http://kenwheeler.github.io/slick/)
 * Image gallery code: (http://startbootstrap.com/template-overviews/thumbnail-gallery/)
-* Theme/Template from Bootswatch - Slate (https://bootswatch.com/slate/)
+* Theme/Template from Bootswatch.
 * Help from a kind reddit user with the Eloquent query when showing all by tag.
 * Code for updated <input> tag in the create an outfit feature found at: (http://stackoverflow.com/questions/28546163/getting-data-attributes-from-slides-in-slick-carousel/28546483#28546483)
